@@ -402,7 +402,7 @@ function Dashboard() {
           </div> */}
         <ul className="sidebar-links">
           <li>
-            <a className="active" onClick={() => navigate('/')}
+            <a className="active" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#dc2626' }}>
                 <img className='icon-pngs' src={Homeicon} />
@@ -411,7 +411,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/products')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/products'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#059669' }}>
                 <img className='icon-pngs' src={producticon} />
@@ -420,7 +420,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/orders')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/orders'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#1d4ed8' }}>
                 <img className='icon-pngs' src={ordersicon} />
@@ -429,7 +429,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/wishlist')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/wishlist'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#f59e42' }}>
                 <img className='icon-pngs' src={wishlisticon} />
@@ -438,7 +438,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/cart')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/cart'}
               style={{ cursor: 'pointer', position: 'relative' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#fbbf24' }}>
                 <img className='icon-pngs' src={carticon} />
@@ -450,7 +450,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/offers')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/offers'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#10b981' }}>
                 <img className='icon-pngs' src={offericon} />
@@ -459,7 +459,7 @@ function Dashboard() {
             </a>
           </li>
           <li>
-            <a className="activ" onClick={() => navigate('/support')}
+            <a className="activ" onClick={() => window.location.href = 'https://bhargav1376.github.io/E-commerce/#/support'}
               style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#3b82f6' }}>
                 <img className='icon-pngs' src={supporticon} />
