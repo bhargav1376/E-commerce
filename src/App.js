@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Index/Dashboard';
 import Products from './Products/Products';
 import Cart from'./Cart/Cart';
@@ -19,7 +19,8 @@ function App() {
         <Route path='/wishlist' element={<Wishlist/>} />
         <Route path='/offers' element={<Offers/>} />
         <Route path='/support' element={<Support/>} />
-
+        {/* Fallback route for unmatched paths */}
+        <Route path="*" element={<Dashboard />} />
       </Routes>
     </Router>
   );

@@ -158,7 +158,8 @@ function Offers() {
       <aside className="sidebar">
         <ul className="sidebar-links">
           <li>
-            <a href="/" className="activ">
+            <a className="activ" onClick={() => navigate('/')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#dc2626' }}>
                 <img className='icon-pngs' src={Homeicon} />
               </span>
@@ -166,7 +167,8 @@ function Offers() {
             </a>
           </li>
           <li>
-            <a href="/products" className="activ">
+            <a className="activ" onClick={() => navigate('/products')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#059669' }}>
                 <img className='icon-pngs' src={producticon} />
               </span>
@@ -174,7 +176,8 @@ function Offers() {
             </a>
           </li>
           <li>
-            <a href="/orders" className="activ">
+            <a className="activ" onClick={() => navigate('/orders')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#1d4ed8' }}>
                 <img className='icon-pngs' src={ordersicon} />
               </span>
@@ -182,7 +185,8 @@ function Offers() {
             </a>
           </li>
           <li>
-            <a href="/wishlist" className="activ">
+            <a className="activ" onClick={() => navigate('/wishlist')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#f59e42' }}>
                 <img className='icon-pngs' src={wishlisticon} />
               </span>
@@ -190,18 +194,20 @@ function Offers() {
             </a>
           </li>
           <li>
-            <a href="/cart" className="activ">
+            <a className="activ" onClick={() => navigate('/cart')}
+              style={{ cursor: 'pointer', position: 'relative' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#fbbf24' }}>
                 <img className='icon-pngs' src={carticon} />
               </span>
               <span>Cart</span>
-             {cart.length > 0 && (
+              {cart.length > 0 && (
                 <span className="sidebar-cart-badge">{cart.length}</span>
-              )} 
+              )}
             </a>
           </li>
           <li>
-            <a href="/offers" className="active">
+            <a className="active" onClick={() => navigate('/offers')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#10b981' }}>
                 <img className='icon-pngs' src={offericon} />
               </span>
@@ -209,7 +215,8 @@ function Offers() {
             </a>
           </li>
           <li>
-            <a href="/support" className="activ">
+            <a className="activ" onClick={() => navigate('/support')}
+              style={{ cursor: 'pointer' }}>
               <span className="nld-sidebar-link-icon" style={{ color: '#3b82f6' }}>
                 <img className='icon-pngs' src={supporticon} />
               </span>
