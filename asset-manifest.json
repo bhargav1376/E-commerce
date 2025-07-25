@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/E-commerce/static/css/main.87c84a3e.css",
+    "main.js": "/E-commerce/static/js/main.0207a6b1.js",
+    "static/js/239.637265e6.chunk.js": "/E-commerce/static/js/239.637265e6.chunk.js",
+    "static/js/977.a327335a.chunk.js": "/E-commerce/static/js/977.a327335a.chunk.js",
+    "static/js/455.b539b3df.chunk.js": "/E-commerce/static/js/455.b539b3df.chunk.js",
+    "static/js/453.158dd2ee.chunk.js": "/E-commerce/static/js/453.158dd2ee.chunk.js",
+    "static/media/order-png.webp": "/E-commerce/static/media/order-png.a933087d1891903d3483.webp",
+    "static/media/tag-png.png": "/E-commerce/static/media/tag-png.c436ce06ad26ec1c3f05.png",
+    "static/media/offers-png.png": "/E-commerce/static/media/offers-png.1b005a95d649465cbdd8.png",
+    "static/media/cart-header-png.png": "/E-commerce/static/media/cart-header-png.18f1e64d3ca5c5b54da7.png",
+    "static/media/Home-png.png": "/E-commerce/static/media/Home-png.01e7a09069c62f5614c9.png",
+    "static/media/unnamed.png": "/E-commerce/static/media/unnamed.33f0e699d96c265fe510.png",
+    "static/media/support-png.png": "/E-commerce/static/media/support-png.9867d178e4bb85313230.png",
+    "static/media/cart-png.png": "/E-commerce/static/media/cart-png.85738a0c011a191f0645.png",
+    "static/media/notifications-png.png": "/E-commerce/static/media/notifications-png.daebf4e4a825a5e7db1b.png",
+    "static/media/Product-png.png": "/E-commerce/static/media/Product-png.bd0d607c74f93205fd22.png",
+    "index.html": "/E-commerce/index.html",
+    "main.87c84a3e.css.map": "/E-commerce/static/css/main.87c84a3e.css.map",
+    "main.0207a6b1.js.map": "/E-commerce/static/js/main.0207a6b1.js.map",
+    "239.637265e6.chunk.js.map": "/E-commerce/static/js/239.637265e6.chunk.js.map",
+    "977.a327335a.chunk.js.map": "/E-commerce/static/js/977.a327335a.chunk.js.map",
+    "455.b539b3df.chunk.js.map": "/E-commerce/static/js/455.b539b3df.chunk.js.map",
+    "453.158dd2ee.chunk.js.map": "/E-commerce/static/js/453.158dd2ee.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87c84a3e.css",
+    "static/js/main.0207a6b1.js"
+  ]
+}
