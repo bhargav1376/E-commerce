@@ -4035,7 +4035,7 @@ function Products() {
             <button className="close-modal-btn" style={{position:'absolute', top:10, right:14, background:'red', color:'#fff', zIndex:1000}} onClick={() => setProductModal(null)}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
-            {/* Left side: image slider with badges overlay */}
+          
             <div
               className="product-modal-slider-wrapper"
               style={{width:'50%', height:'400px' , position:'relative', marginBottom:0, borderRadius:12, overflow:'hidden', flexShrink:0}}
