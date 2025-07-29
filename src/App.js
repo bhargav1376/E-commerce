@@ -1,7 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Index/Dashboard';
-import Dashboardcopy from './Index/Dashboard copy';
 import Products from './Products/Products';
 import Cart from'./Cart/Cart';
 import Orders from './Orders/Orders';
@@ -15,7 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Dashboard  />} />
-        {/* <Route path="/" element={<Dashboardcopy />} /> */}
+       
         <Route path="/products" element={<Products />} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/orders' element={<Orders/>} />
@@ -23,7 +22,7 @@ function App() {
         <Route path='/offers' element={<Offers/>} />
         <Route path='/support' element={<Support/>} />
         <Route path='/profile' element={<Profile/>} />
-        {/* Fallback route for unmatched paths */}
+
         <Route path="*" element={<Dashboard />} />
       </Routes>
     </Router>
