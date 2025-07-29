@@ -571,7 +571,7 @@ function Dashboard() {
                     boxShadow: '0 1px 4px rgba(0,0,0,0.10)'
                   }}>{cartCount}</span>
                 )} */}
-                {cart.length > 0 && (
+                {cart && cart.length > 0 && (
                   <span style={{
                     position: 'absolute',
                     top: -4,
@@ -589,7 +589,7 @@ function Dashboard() {
                     padding: '0 6px',
                     zIndex: 2,
                     boxShadow: '0 1px 4px rgba(0,0,0,0.10)'
-                  }}>{cart.length}</span>
+                  }}>{cart && cart.length}</span>
                 )}
               </div>
               </div>
