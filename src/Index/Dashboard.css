@@ -1469,7 +1469,7 @@ background: linear-gradient(to 45deg, #90EE90, #2E8B57);
   font-size: 1em;
   cursor: pointer;  
   transition: background 0.2s;
-  &:hover {
-    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
-  }
+}
+.whyshop-modal-btn:hover {
+  background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
 }

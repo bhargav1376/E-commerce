@@ -199,8 +199,8 @@ function Wishlist() {
                 <img className='icon-pngs' src={carticon} />
               </span>
               <span>Cart</span>
-              {cart.length > 0 && (
-                <span className="sidebar-cart-badge">{cart.length}</span>
+              {cart && cart.length > 0 && (
+                <span className="sidebar-cart-badge">{cart && cart.length}</span>
               )}
             </a>
           </li>
@@ -253,7 +253,7 @@ function Wishlist() {
             </div>
             <div className="icon-wrapper" style={{position: 'relative', cursor: 'pointer'}} onClick={() => navigate('/cart')}>
               <img className='icon-header' src={cartheadericon} />
-              {cart.length > 0 && (
+              {cart && cart.length > 0 && (
                   <span style={{
                     position: 'absolute',
                     top: -4,
@@ -271,7 +271,7 @@ function Wishlist() {
                     padding: '0 6px',
                     zIndex: 2,
                     boxShadow: '0 1px 4px rgba(0,0,0,0.10)'
-                  }}>{cart.length}</span>
+                  }}>{cart && cart.length}</span>
                 )}
             </div>
             <div className="icon-wrapper language-icon" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
