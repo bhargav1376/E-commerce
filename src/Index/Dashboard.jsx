@@ -282,22 +282,22 @@ function Dashboard() {
   };
 
   // Slideshow navigation
-  const nextSlide = () => setSlideIdx((slideIdx + 1) % slides.length);
-  const prevSlide = () => setSlideIdx((slideIdx - 1 + slides.length) % slides.length);
+  const nextSlide = () => setSlideIdx((slideIdx + 1) % (slides ? slides.length : 0));
+  const prevSlide = () => setSlideIdx((slideIdx - 1 + (slides ? slides.length : 0)) % (slides ? slides.length : 0));
   const goToSlide = idx => setSlideIdx(idx);
 
   // Auto slide show
   useEffect(() => {
     if (isSlideHovered) return;
     const timer = setTimeout(() => {
-      setSlideIdx(idx => (idx + 1) % slides.length);
+      setSlideIdx(idx => (idx + 1) % (slides ? slides.length : 0));
     }, 3000);
     return () => clearTimeout(timer);
   }, [slideIdx, isSlideHovered]);
 
   const nextCategorySlide = () => {
     setCategoryStartIdx(idx =>
-      idx + visibleCategoryCount < categoryImages.length ? idx + 1 : idx
+      idx + visibleCategoryCount < (categoryImages ? categoryImages.length : 0) ? idx + 1 : idx
     );
   };
   const prevCategorySlide = () => {
@@ -589,7 +589,7 @@ function Dashboard() {
                     padding: '0 6px',
                     zIndex: 2,
                     boxShadow: '0 1px 4px rgba(0,0,0,0.10)'
-                  }}>{cart && cart.length}</span>
+                  }}>{cart.length}</span>
                 )}
               </div>
               </div>
@@ -700,7 +700,7 @@ function Dashboard() {
                 <button
                   className="category-arrow right"
                   onClick={nextCategorySlide}
-                  disabled={categoryStartIdx + visibleCategoryCount >= categoryImages.length}
+                  disabled={categoryStartIdx + visibleCategoryCount >= (categoryImages ? categoryImages.length : 0)}
                   style={{position: 'absolute', right: 0, top: '60%', transform: 'translateY(-50%)', zIndex: 2}}
                 ><FontAwesomeIcon icon={faCaretRight} /></button>
               )}

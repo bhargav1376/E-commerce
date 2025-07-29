@@ -495,7 +495,7 @@ function Dashboardcopy() {
                 <img className='icon-pngs' src={carticon} />
               </span>
               <span>Cart</span>
-              {cart.length > 0 && (
+              {cart && cart.length > 0 && (
                 <span className="sidebar-cart-badge">{cart.length}</span>
               )}
             </a>
