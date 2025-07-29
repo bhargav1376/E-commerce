@@ -106,8 +106,8 @@
   height: 30px;
   font-weight: 700;
   border: none;
-  background: #e0e7ff;
-  color: #2563eb;
+  background: #91e9cd29;
+  color: #228B22 ;
   font-size: 1.1rem;
   border-radius: 50%;
   cursor: pointer;
@@ -115,7 +115,7 @@
   box-shadow: 0 1px 4px rgba(37,99,235,0.08);
 }
 .checkout-cart-qty-controls button:hover {
-  background: #2563eb;
+  background: #228B22;
   color: #fff;
 }
 .checkout-cart-qty-controls button:disabled {
@@ -130,7 +130,7 @@
   min-width: 120px; /* Increased min-width for double prices */
   text-align: right;
   font-weight: 500;
-  color: #2563eb;
+  color: #228B22;
   white-space: nowrap;
   flex: 0 0 auto;
 }
@@ -207,7 +207,7 @@ text-align: center;
 }
 
 .checkout-addon-plus {
-  background: #2563eb;
+  background: #22c55e;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -350,7 +350,7 @@ text-align: center;
   color: #222;
 }
 .apply-coupon-btn {
-  background: #a78bfa;
+  background: linear-gradient(90deg, #059669 0%, #22c55e 100%);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -403,7 +403,7 @@ text-align: center;
   background: #fecaca;
 }
 .add-coupon-btn {
-  background: linear-gradient(90deg, #88BDF2 0%, #88BDF2 100%);
+  background: linear-gradient(90deg, #228B22 0%, #059669 100%);
   color: #fff;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -417,9 +417,9 @@ text-align: center;
 
 }
 .add-coupon-btn:hover {
-  background: linear-gradient(90deg, #bdddfc 0%, #bdddfc 100%);
-  border: 1px solid #88BDF2;
-  color: #000;
+  background: linear-gradient(90deg, #fff 0%, #fff 100%);
+  border: 1px solid #228B22;
+  color: #228B22;
   box-shadow: 0 4px 16px rgba(124, 58, 237, 0.16);
 }
 
@@ -434,8 +434,9 @@ text-align: center;
 }
 .tip-btn {
   background: #f1f5f9;
-  color: #222;
+  color: #059669;
   border: none;
+  font-weight: 700;
   border-radius: 6px;
   padding: 6px 18px;
   font-size: 1rem;
@@ -443,7 +444,7 @@ text-align: center;
   transition: background 0.15s;
 }
 .tip-btn.selected, .tip-btn:hover {
-  background: #2563eb;
+  background: #059669;
   color: #fff;
 }
 .tip-other-row {
@@ -469,6 +470,9 @@ text-align: center;
 /* Address Section */
 .checkout-address-section h4 {
   margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
 }
 .address-radio-row {
   display: flex;
@@ -578,7 +582,7 @@ text-align: center;
   font-size: 1.08rem;
 }
 .proceed-payment-btn {
-  background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+  background: linear-gradient(90deg, #22c55e 0%, #059669 100%);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -591,7 +595,7 @@ text-align: center;
   margin-top: 18px;
 }
 .proceed-payment-btn:hover {
-  background: linear-gradient(90deg, #1d4ed8 0%, #2563eb 100%);
+  background: linear-gradient(90deg, #059669 0%, #22c55e 100%);
   color: #fff;
   box-shadow: 0 4px 16px rgba(37,99,235,0.16);
 }
@@ -614,7 +618,7 @@ text-align: center;
   font-size: 1rem;
 }
 .pay-btn {
-  background: #2563eb;
+  background: linear-gradient(90deg, #059669 0%, #22c55e 100%);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -626,7 +630,7 @@ text-align: center;
   transition: background 0.15s;
 }
 .pay-btn:hover {
-  background: #1d4ed8;
+  background: linear-gradient(90deg, #059669 0%, #228B22 100%);
 }
 .payment-error-msg {
   color: #b91c1c;
@@ -639,8 +643,9 @@ text-align: center;
   margin-top: 6px;
 }
 .upi-app-btn {
-  background: #f1f5f9;
-  color: #222;
+  background: #f1f9f3;
+  color: #228B22;
+  font-weight: 700;
   border: none;
   border-radius: 6px;
   padding: 6px 14px;
@@ -649,7 +654,7 @@ text-align: center;
   transition: background 0.15s;
 }
 .upi-app-btn:hover {
-  background: #2563eb;
+  background: #228B22;
   color: #fff;
 }
 .cod-success-row span {
@@ -689,7 +694,7 @@ text-align: center;
   margin-bottom: 18px;
   text-align: center;
 }
-.order-success-modal .close-modal-btn {
+/* .order-success-modal .close-modal-btn {
   background: #2563eb;
   color: #fff;
   border: none;
@@ -700,9 +705,10 @@ text-align: center;
   cursor: pointer;
   margin-top: 8px;
   transition: background 0.15s;
-}
-.order-success-modal .close-modal-btn:hover {
-  background: #1d4ed8;
+} */
+.close-modal-btn:hover {
+  background: #b91c1c !important;
+  color: #fff;
 }
 
 /* Side by side layout for Coupons & Tip section */
@@ -753,7 +759,7 @@ text-align: center;
 .address-radio-input {
   width: 22px;
   height: 22px;
-  accent-color: #2563eb;
+  accent-color: #228B22;
   margin-right: 18px;
   flex-shrink: 0;
 }
@@ -774,10 +780,10 @@ text-align: center;
 }
 .address-radio-label-card input[type="radio"]:checked + .address-radio-details .address-label-main,
 .address-radio-label-card .address-radio-input:checked + .address-radio-details .address-label-main {
-  color: #2563eb;
+  color: #059669;
 }
 .address-radio-label-card:has(input[type="radio"]:checked) {
-  border: 2px solid #2563eb;
+  border: 2px solid #228B22;
   box-shadow: 0 4px 16px rgba(37,99,235,0.12);
 }
 @media (max-width: 600px) {
@@ -812,15 +818,16 @@ text-align: center;
 }
 .payment-mode-card.selected,
 .payment-mode-card:focus {
-  background: #2563eb;
+  background: #22c55e;
   color: #fff;
-  border: 2px solid #2563eb;
+  border: 2px solid #22c55e;
   box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+  transform: translateY(-2px) ; 
 }
 .payment-mode-card:hover:not(.selected) {
-  background: #e0e7ff;
-  color: #2563eb;
-  border: 2px solid #a5b4fc;
+  background: #e0fff2;
+  color: #059669;
+  border: 2px solid #059669;
 }
 @media (max-width: 600px) {
   .payment-modes-row-cards {
@@ -877,9 +884,9 @@ text-align: center;
 .cart-qty-unit {
   display: inline-block;
   margin-left: 7px;
-  color: #64748b;
+  color: #059669;
   font-size: 0.97rem;
-  font-weight: 500;
+  font-weight: 700;
   background: #f1f5f9;
   border-radius: 6px;
   padding: 2px 8px;
@@ -896,7 +903,7 @@ text-align: center;
 .cart-qty-unit {
   display: flex;
   margin-left: 7px;
-  color: #64748b;
+  color: #059669;
   font-size: 0.97rem;
   font-weight: 500;
   background: #f1f5f9;

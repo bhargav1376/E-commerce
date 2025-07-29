@@ -1,24 +1,28 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Index/Dashboard';
+import Dashboardcopy from './Index/Dashboard copy';
 import Products from './Products/Products';
 import Cart from'./Cart/Cart';
 import Orders from './Orders/Orders';
 import Wishlist from './Wishlist/Wishlist';
 import Offers from './Offers/Offers';
 import Support from './Support/Support';
+import Profile from './Profile/Profile'; 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard  />} />
+        {/* <Route path="/" element={<Dashboardcopy />} /> */}
         <Route path="/products" element={<Products />} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/orders' element={<Orders/>} />
         <Route path='/wishlist' element={<Wishlist/>} />
         <Route path='/offers' element={<Offers/>} />
         <Route path='/support' element={<Support/>} />
+        <Route path='/profile' element={<Profile/>} />
         {/* Fallback route for unmatched paths */}
         <Route path="*" element={<Dashboard />} />
       </Routes>

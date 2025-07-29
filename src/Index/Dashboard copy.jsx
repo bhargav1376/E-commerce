@@ -222,7 +222,7 @@ const whyShop = [
   { key: 'support', icon: faQuestionCircle, title: '24/7 Support', desc: 'We are here to help you anytime.' },
 ];
 
-function Dashboard() {
+function Dashboardcopy() {
   const [collapsed, setCollapsed] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifDropdown, setNotifDropdown] = useState(false);
@@ -894,4 +894,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Dashboardcopy;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Products.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAppleAlt, faShoppingCart, faChevronRight  ,faHome, faUser, faTag, faCog, faBars, faChevronLeft, faChevronDown, faChevronUp, faSignOutAlt, faGlobe, faBell, faSearch, faTrash, faFire, faChartLine, faStar, faExpand, faCompress, faHeart as faHeartFilled, faQuestionCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAppleAlt, faCheckCircle, faShoppingCart, faHeart, faChevronRight  ,faHome, faUser, faTag, faCog, faBars, faChevronLeft, faChevronDown, faChevronUp, faSignOutAlt, faGlobe, faBell, faSearch, faTrash, faFire, faChartLine, faStar, faExpand, faCompress, faHeart as faHeartFilled, faQuestionCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import logo from '../Images/unnamed.png';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -3876,11 +3876,11 @@ function Products() {
                       {/* Wishlist Heart Icon */}
                       <button
                         className="wishlist-heart-btn"
-                        style={{position:'absolute', bottom:10, right:10, background:'rgba(255,255,255,0.85)', border:'none', borderRadius:'50%', padding:7, cursor:'pointer', boxShadow:'0 1px 4px rgba(0,0,0,0.10)'}}
+                        style={{position:'absolute', bottom:10, right:10, border:'none', background: inWishlist ? 'rgba(255,255,255,0.85)' : 'rgba(255,182,182,1)' , borderRadius:'50%', padding:7, cursor:'pointer', boxShadow:'0 1px 4px rgba(0,0,0,0.10)'}}
                         onClick={e => { e.stopPropagation(); handleWishlist(product.id); }}
                         title={inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
                       >
-                        <FontAwesomeIcon icon={inWishlist ? faHeartFilled : faHeartRegular} style={{color: inWishlist ? '#ef4444' : '#bdbdbd', fontSize:'1.3em'}} />
+                        <FontAwesomeIcon icon={inWishlist ? faHeartFilled : faHeart} style={{color: inWishlist ? '#ef4444' : '#fff', fontSize:'1.3em' }}/>
                       </button>
                       {product.discount && (
                         <span className="product-discount-badge">{product.discount}% OFF</span>
@@ -4102,8 +4102,8 @@ function Products() {
                     position: 'absolute',
                     bottom: 12,
                     left: 12,
-                    background: 'linear-gradient(90deg,#fbbf24 60%,#f59e42 100%)',
-                    color: '#fff',
+                    background: 'linear-gradient(90deg,#fee2e2 60%,#fee2e2 100%)',
+                    color: '#b91c1c',
                     fontWeight: 700,
                     fontSize: 15,
                     borderRadius: 8,
@@ -4399,7 +4399,15 @@ function Products() {
                  onClick={() => setNotified(prev => ({ ...prev, [product.id]: true }))}
                  disabled={!!notified[product.id]}
                >
-                 {notified[product.id] ? 'Alert Set ✔️' : 'Notify Me'}
+                 {notified[product.id] ? (
+                   <>
+                     <FontAwesomeIcon icon={faCheckCircle} style={{color:'#16a34a'}} /> 
+                   </>
+                 ) : (
+                   <>
+                     <FontAwesomeIcon icon={faBell} style={{color:'#fff'}} /> 
+                   </>
+                 )}
                </button>
              ) : (
                <button

@@ -350,6 +350,21 @@ function Cart() {
 
   const [addonModal, setAddonModal] = useState(null); // { product: ... } or null
 
+  let displayName = user.name;
+  try {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile && profile.firstName) displayName = profile.firstName;
+  } catch {}
+
+const [headerImage, setHeaderImage] = useState(() => {
+    try {
+      const profile = JSON.parse(localStorage.getItem('profile'));
+      return (profile && profile.image) ? profile.image : user.image;
+    } catch {
+      return user.image;
+    }
+  });
+  
   return (
     <>
       <div className={`dashboard-container${collapsed ? ' collapsed' : ''}`}> 
@@ -512,15 +527,15 @@ function Cart() {
               <img className='icon-header' src={tagicon} />
               </div>
               <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
-                <img src={user.image} alt="User" className="user-image" />
-                <span className="user-name">{user.name}</span>
+                <img src={headerImage} alt="User" className="user-image" />
+                <span className="user-name">{displayName}</span>
                 <span className="user-badge">Premium</span>
                 <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
               </div>
               {dropdownOpen && (
                 <div className="user-dropdown">
-                  <a href="#profile"><img className='icon-pngs-header' src={usericon} /> Profile</a>
-                  <a href="#settings"><img className='icon-pngs-header' src={settingicon}/> Settings</a>
+                  <a onClick={() => navigate('/profile')}><img className='icon-pngs-header' src={usericon} /> Profile</a>
+                  <a onClick={() => navigate('/settings')}><img className='icon-pngs-header' src={settingicon}/> Settings</a>
                   <button className="logout-btn"><img className='icon-pngs-header' src={logouticon} /> Logout</button>
                 </div>
               )}
@@ -631,7 +646,7 @@ function Cart() {
                     margin: '0 auto',
                     maxWidth: 420
                   }}>
-                    <FontAwesomeIcon icon={faTag} style={{fontSize: 28, color: '#1d4ed8', background: '#e0e7ff', borderRadius: '8px', padding: 10}} />
+                    <FontAwesomeIcon icon={faTag} style={{fontSize: 28, color: '#228B22', background: '#e0ffe6ff', borderRadius: '8px', padding: 10}} />
                     <div style={{flex: 1}}>
                       {/* <h4 style={{margin: 0, color: '#1d4ed8', fontWeight: 600, fontSize: 18}}>Coupons</h4> */}
                       {appliedCoupon ? (
@@ -658,7 +673,7 @@ function Cart() {
                     maxWidth: 420
                   }}>
                     <div className="checkout-tip-section" style={{margin: 0}}>
-                      <h4 style={{margin: 0, color: '#26282A', fontWeight: 600, fontSize: 18, marginBottom:10}}>Say Thanks with a Tip</h4>
+                      <h4 style={{margin: 0, color: '#059669', fontWeight: 600, fontSize: 18, marginBottom:10}}>Say Thanks with a Tip</h4>
                       <div className="tip-btn-row">
                         {[10, 20, 50].map(amount => (
                           <button
@@ -715,7 +730,7 @@ function Cart() {
                 <div className="coupon-modal-overlay" onClick={() => setCouponModal(false)}>
                   <div className="coupon-modal new-coupon-modal" onClick={e => e.stopPropagation()} style={{boxShadow: '0 8px 32px rgba(37,99,235,0.18)', borderRadius: 18, maxWidth: 500, width: '95vw', padding: '32px 28px'}}>
                     <div className="coupon-modal-header" style={{borderBottom: 'none', padding: 0, marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                      <h4 style={{color: '#1d4ed8', fontWeight: 700, fontSize: 20, margin: 0}}>Apply Coupon</h4>
+                      <h4 style={{color: '#098503ff', fontWeight: 700, fontSize: 20, margin: 0}}>Apply Coupon</h4>
                       <button className="close-modal-btn" onClick={() => setCouponModal(false)}>
                         <FontAwesomeIcon icon={faTimes} />
                       </button>
@@ -727,7 +742,7 @@ function Cart() {
                         placeholder="Enter coupon code"
                         value={couponInput}
                         onChange={e => setCouponInput(e.target.value)}
-                        style={{marginBottom: 12, border: '1.5px solid #1d4ed8', borderRadius: 8, fontSize: 17, padding: '10px 14px'}}
+                        style={{marginBottom: 12, border: '1.5px solid #21ae19ff', borderRadius: 8, fontSize: 17, padding: '10px 14px'}}
                       />
                       <button
                         className="apply-coupon-btn"
@@ -738,7 +753,7 @@ function Cart() {
                       {couponError && <div className="coupon-error-msg" style={{marginTop: 8}}>{couponError}</div>}
                       {/* Show up to 5 available coupons below */}
                       <div style={{marginTop: 18}}>
-                        <h5 style={{color: '#1d4ed8', fontWeight: 600, fontSize: 15, margin: '0 0 8px 0'}}>Available Coupons</h5>
+                        <h5 style={{color: '#09b752ff', fontWeight: 700, fontSize: 18, margin: '0 0 10px 0'}}>Available Coupons</h5>
                         {coupons.slice(0, 5).map(c => (
                           <div key={c.code} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f1f5f9', borderRadius: 8, padding: '10px 14px', marginBottom: 8, boxShadow: '0 1px 4px rgba(37,99,235,0.06)'}}>
                             <div>
@@ -790,7 +805,7 @@ function Cart() {
                   margin: '0 auto',
                   marginTop: 18
                 }}>
-                  <h4 style={{margin: 0, color: '#1d4ed8', fontWeight: 700, fontSize: 19, marginBottom: 18, letterSpacing: 0.2}}>Bill Details</h4>
+                  <h4 style={{margin: 0, color: '#228B22', fontWeight: 700, fontSize: 19, marginBottom: 18, letterSpacing: 0.2}}>Bill Details</h4>
                   <div style={{display: 'flex', flexDirection: 'column', gap: 12}}>
                     <div className="bill-row"><span>Items Total</span><span>₹{itemTotal}</span></div>
                     {appliedCoupon && <div className="bill-row"><span>Coupon Discount</span><span style={{color: '#059669'}}>-₹{couponDiscount}</span></div>}
@@ -799,7 +814,7 @@ function Cart() {
                     <div className="bill-row"><span>GST (5%)</span><span>₹{gst}</span></div>
                     <div className="bill-row"><span>Other Charges</span><span>₹{charges}</span></div>
                     <div style={{borderTop: '1.5px solid #e5e7eb', margin: '10px 0 0 0'}}></div>
-                    <div className="bill-row total" style={{background: '#f1f5f9', borderRadius: 8, padding: '10px 0', fontSize: 18, color: '#1d4ed8', fontWeight: 700, marginTop: 0,  padding: '12px 28px',}}>
+                    <div className="bill-row total" style={{background: '#f1f5f9', borderRadius: 8, padding: '10px 0', fontSize: 18, color: '#228B22', fontWeight: 700, marginTop: 0,  padding: '12px 28px',}}>
                       <span>Grand Total</span><span>₹{grandTotal}</span>
                     </div>
                   </div>
@@ -839,20 +854,6 @@ function Cart() {
                       key={mode}
                       className={`payment-mode-card${paymentMode === mode ? ' selected' : ''}`}
                       onClick={() => setPaymentMode(mode)}
-                      style={{
-                        background: paymentMode === mode ? '#2563eb' : '#f1f5f9',
-                        color: paymentMode === mode ? '#fff' : '#222',
-                        border: paymentMode === mode ? '2px solid #2563eb' : '2px solid #e5e7eb',
-                        borderRadius: 10,
-                        padding: '14px 32px',
-                        fontSize: 17,
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                        boxShadow: paymentMode === mode ? '0 2px 12px rgba(37,99,235,0.10)' : 'none',
-                        transition: 'all 0.15s',
-                        outline: 'none',
-                        minWidth: 110
-                      }}
                     >
                       {mode === 'UPI' && 'UPI'}
                       {mode === 'CARD' && 'Card'}

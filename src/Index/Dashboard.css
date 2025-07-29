@@ -1,3 +1,22 @@
+/* Show the Go to Category button only on image hover */
+.slide-img-hover-group:hover .slide-img-go-btn {
+  display: block !important;
+  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  transition: background 0.3s, transform 0.2s;
+  cursor: pointer;
+  opacity: 0.96;
+}
+.slide-img-go-btn:hover {
+  background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+  transform: scale(1.07);
+}
 /* Dashboard Container */
 .dashboard-container {
   display: flex;
@@ -18,7 +37,9 @@
   height: 100vh;
   width: 220px;
   /* background: rgba(59, 130, 246, 0.3); */
-  background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 100%);
+  /* background: linear-gradient(135deg, #00c9a7 0%, #92fe9d 100%); */
+  background: linear-gradient(135deg, rgba(0, 201, 167, 0.5) 0%, rgba(146, 254, 157, 0.5) 100%);
+
   color: #334155;
   box-shadow: 2px 0 12px 0 rgba(60,60,60,0.08);
   display: flex;
@@ -75,8 +96,8 @@
 }
 .sidebar-links a:hover, .sidebar-links a.active {
   background: rgba(245, 245, 245);
-  border-left: 4px solid #3b82f6;
-  color: #1e40af;
+  border-left: 4px solid #059669;
+  color: #059669;
 
 }
 .sidebar-links svg {
@@ -243,7 +264,7 @@
   transition: background 0.2s;
 }
 .icon-wrapper:hover {
-  background: #f0f0f0;
+  background: #d0efd03e;
 }
 .icon-dropdown {
   position: absolute;
@@ -640,7 +661,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: #4682A9;
+  background: linear-gradient(to right, #228B22, #32CD32);
   color: #fff;
   font-size: 0.95rem;
   font-weight: 600;
@@ -659,7 +680,7 @@
   margin: 0 0 8px 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #4682A9;
+  color: #228B22;
 }
 .card-content p {
   margin: 0;
@@ -803,9 +824,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 110px;
-  height: 130px;
+  width: 280px;
+  height: 135px;
   background: #f9fafb;
+  /* background: linear-gradient(to right, rgba(50, 205, 50, 0.15), rgba(60, 179, 113, 0.1)); */
   border: none;
   border-radius: 18px;
   box-shadow: 0 4px 16px rgba(70,130,169,0.10);
@@ -815,7 +837,8 @@
 .quick-category-card:hover {
   transform: scale(1.08);
   box-shadow: 0 8px 32px rgba(70,130,169,0.18);
-  background: #eaf3fa;
+  /* background: #eaf3fa; */
+   background: linear-gradient(to right, rgba(60, 179, 113, 0.1) , rgba(50, 205, 50, 0.15));
 }
 .quick-category-img {
   width: 90px;
@@ -829,9 +852,9 @@
   display: block;
 }
 .quick-category-card span {
-  font-size: 1rem;
-  color: #222e3c;
-  font-weight: 600;
+  font-size: 1.1rem;
+  color: #228B22;
+  font-weight: 700;
   margin-top: 0;
   text-align: center;
 }
@@ -904,7 +927,7 @@
 }
 
 .quick-categories-section .category-arrow {
-  background: #4682A9;
+  background:  #2E8B57 !important;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -921,13 +944,13 @@
   z-index: 3;
 }
 .quick-categories-section .category-arrow:disabled {
-  background: #bcdffb;
+ background: linear-gradient(to 45deg, #90EE90, #2E8B57);
   color: #fff;
   cursor: not-allowed;
   opacity: 0.5;
 }
 .quick-categories-section .category-arrow:hover:not(:disabled) {
-  background: #319795;
+background: linear-gradient(to 45deg, #90EE90, #2E8B57);
   color: #fff;
   opacity: 1;
 }
@@ -948,7 +971,7 @@
   margin-bottom: 12px;
 }
 .slide-arrow.new-top-arrow {
-  background: #185a9d;
+  background: #3CB371;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -962,11 +985,11 @@
   box-shadow: 0 2px 8px rgba(70,130,169,0.10);
   transition: background 0.2s, color 0.2s, opacity 0.2s;
   opacity: 0.85;
-  border: 1px solid #185a9d;
+  border: 1px solid #3CB371;
 }
 .slide-arrow.new-top-arrow:hover {
   background: #fff;
-  color: #185a9d;
+  color: #3CB371;
   opacity: 1;
 }
 .slide-dots.new-top-dots {
@@ -1134,7 +1157,7 @@
 }
 .why-shop-title {
   font-size: 1.1rem;
-  color: #319795 ;
+  color: #059669 ;
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -1436,3 +1459,17 @@
   color: #fff;
 }
 
+.whyshop-modal-btn{
+  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 1em;
+  cursor: pointer;  
+  transition: background 0.2s;
+  &:hover {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+  }
+}

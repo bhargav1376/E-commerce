@@ -99,6 +99,8 @@ function Offers() {
       badge: 'BOGO',
       type: 'Limited Time',
       timer: 'Ends in 03:21:10',
+      name : 'strawberry',
+      category: 'Fruits',
     },
   ];
   const recommended = [
@@ -151,6 +153,21 @@ function Offers() {
     if (offer.title.toLowerCase().includes('combo')) return '/products?category=Super%20Saver%20Combo';
     return '/products';
   }
+
+  let displayName = user.name;
+  try {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile && profile.firstName) displayName = profile.firstName;
+  } catch {}
+
+  const [headerImage, setHeaderImage] = useState(() => {
+      try {
+        const profile = JSON.parse(localStorage.getItem('profile'));
+        return (profile && profile.image) ? profile.image : user.image;
+      } catch {
+        return user.image;
+      }
+    });
 
   return (
     <div className={`dashboard-container${collapsed ? ' collapsed' : ''}`}> 
@@ -292,15 +309,15 @@ function Offers() {
               <img className='icon-header' src={tagicon} />
             </div>
             <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
-              <img src={user.image} alt="User" className="user-image" />
-              <span className="user-name">{user.name}</span>
+              <img src={headerImage} alt="User" className="user-image" />
+              <span className="user-name">{displayName}</span>
               <span className="user-badge">Premium</span>
               <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
             </div>
             {dropdownOpen && (
               <div className="user-dropdown">
-                <a href="#profile"><img className='icon-pngs-header' src={usericon} /> Profile</a>
-                <a href="#settings"><img className='icon-pngs-header' src={settingicon}/> Settings</a>
+                <a onClick={() => navigate('/profile')}><img className='icon-pngs-header' src={usericon} /> Profile</a>
+                <a onClick={() => navigate('/settings')}><img className='icon-pngs-header' src={settingicon}/> Settings</a>
                 <button className="logout-btn"><img className='icon-pngs-header' src={logouticon} /> Logout</button>
               </div>
             )}
@@ -335,8 +352,14 @@ function Offers() {
             <h3 className="offers-section-title">⏰ Limited Time Offers</h3>
             <div className="offers-grid">
               {limitedTime.map((offer, idx) => (
-                <div className="offer-card limited" key={idx} style={{cursor:'pointer'}} onClick={() => navigate(getOfferNavPath(offer))}>
-                  <div className="offer-img-wrap">
+                <div className="offer-card limited" key={idx} style={{cursor:'pointer'}} onClick={() => {
+                  if (offer.title && offer.title.toLowerCase().includes('strawberry')) {
+                    navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
+                  } else {
+                    navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
+                  }
+                }}>
+                  <div className="offer-img-wrap heig-og ">
                     <img src={offer.img} alt={offer.title} className="offer-img" />
                     <span className="offer-badge limited-badge">{offer.badge}</span>
                     <span className="offer-timer">{offer.timer}</span>
@@ -344,7 +367,8 @@ function Offers() {
                   <div className="offer-content">
                     <h4 className="offer-title">{offer.title}</h4>
                     <p className="offer-desc">{offer.desc}</p>
-                    <button className="offer-btn" onClick={e => {e.stopPropagation(); navigate(getOfferNavPath(offer));}}>Get Deal</button>
+                    <button className="offer-btn" onClick={e => {e.stopPropagation();  navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
+}}>Get Deal</button>
                   </div>
                 </div>
               ))}

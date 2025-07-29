@@ -270,6 +270,22 @@ function Support() {
   // Add state for ticket status modal
   const [showTicketStatusModal, setShowTicketStatusModal] = useState(false);
 
+  let displayName = user.name;
+  try {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile && profile.firstName) displayName = profile.firstName;
+  } catch {}
+
+
+  const [headerImage, setHeaderImage] = useState(() => {
+      try {
+        const profile = JSON.parse(localStorage.getItem('profile'));
+        return (profile && profile.image) ? profile.image : user.image;
+      } catch {
+        return user.image;
+      }
+    });
+
   return (
     <>
       <div className={`dashboard-container${collapsed ? ' collapsed' : ''}`}> 
@@ -411,15 +427,15 @@ function Support() {
                 <img className='icon-header' src={tagicon} />
               </div>
               <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
-                <img src={user.image} alt="User" className="user-image" />
-                <span className="user-name">{user.name}</span>
+                <img src={headerImage} alt="User" className="user-image" />
+                <span className="user-name">{displayName}</span>
                 <span className="user-badge">Premium</span>
                 <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
               </div>
               {dropdownOpen && (
                 <div className="user-dropdown">
-                  <a href="#profile"><img className='icon-pngs-header' src={usericon} /> Profile</a>
-                  <a href="#settings"><img className='icon-pngs-header' src={settingicon}/> Settings</a>
+                  <a onClick={() => navigate('/profile')}><img className='icon-pngs-header' src={usericon} /> Profile</a>
+                  <a onClick={() => navigate('/settings')}><img className='icon-pngs-header' src={settingicon}/> Settings</a>
                   <button className="logout-btn"><img className='icon-pngs-header' src={logouticon} /> Logout</button>
                 </div>
               )}

@@ -139,7 +139,7 @@
 
 .wishlist-add-to-cart-btn {
   margin-top: 12px;
-  background: linear-gradient(90deg, #8b5cf6 0%, #a855f7 100%);
+  background: linear-gradient( 90deg, #228B22, #3CB371);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -155,7 +155,7 @@
   transition: background 0.15s;
 }
 .wishlist-add-to-cart-btn:hover {
-  background: linear-gradient(90deg, #a855f7 0%, #8b5cf6 100%);
+  background:linear-gradient(45deg, #3CB371 , #228B22);
 }
 .wishlist-pop-message {
   position: fixed;
