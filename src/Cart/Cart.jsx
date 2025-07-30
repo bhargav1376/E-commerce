@@ -992,5 +992,6 @@ const [headerImage, setHeaderImage] = useState(() => {
     </>
   );
 }
+ // "react-scripts": "4.0.3",
 
 export default Cart;
