@@ -26,6 +26,17 @@
   min-width: 240px;
   max-width: 240px;
 }
+
+/* Sidebar collapsed: smaller cards (200px) */
+.products-grid.sidebar-collapsed {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.products-grid.sidebar-collapsed .product-card {
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
 .product-card:hover {
   box-shadow: 0 6px 24px rgba(70,130,169,0.18);
   transform: translateY(-4px) scale(1.03);
@@ -475,8 +486,8 @@ transform: translateY(-2px) scale(1.01);
   display: none;
 }
 .category-card-vertical {
-  background: #f4f6f8;
-  color: #185a9d;
+  background: #def0e7;
+  color: #047d19;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(70,130,169,0.06);
   display: flex;
@@ -626,9 +637,10 @@ transform: translateY(-2px) scale(1.01);
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(70,130,169,0.13);
-  min-width: 260px;
-  max-width: 320px;
+  min-width: 270px;
+  max-width: 270px;
   width: 100%;
+  height: 320px;
   box-sizing: border-box;
   flex: 1 1 0;
   padding: 24px 20px 24px 20px;
@@ -636,6 +648,11 @@ transform: translateY(-2px) scale(1.01);
   flex-direction: column;
   align-items: center;
   transition: all 0.2s ease-in-out;
+}
+.dashboard-container.collapsed .summary-card.large {
+ min-width: 310px;
+  max-width: 310px;
+  height: 320px;
 }
 .summary-card.large:hover {
   box-shadow: 0 6px 24px rgba(70,130,169,0.18);
@@ -656,7 +673,7 @@ transform: translateY(-2px) scale(1.01);
 }
 .summary-outofstock-badge {
   position: absolute;
-  right: 12px;
+  left: 12px;
   bottom: 12px;
   background: #e53e3e;
   color: #fff;
@@ -674,12 +691,6 @@ transform: translateY(-2px) scale(1.01);
   align-items: flex-start;
   gap: 8px;
   margin-top: 8px;
-}
-.summary-product-name {
-  font-size: 1.08rem;
-  font-weight: 700;
-  color: #185a9d;
-  margin-bottom: 2px;
 }
 .summary-product-desc {
   font-size: 0.98rem;
@@ -733,7 +744,7 @@ transform: translateY(-2px) scale(1.01);
   min-width: 0;
 }
 .summary-product-name {
-  font-size: 1.13rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #185a9d;
   margin-bottom: 2px;
@@ -743,7 +754,7 @@ transform: translateY(-2px) scale(1.01);
 }
 .summary-product-about {
   flex: 2 1 0;
-  font-size: 1.01rem;
+  font-size: 0.85rem;
   color: #444;
   text-align: left;
   padding-right: 12px;
@@ -811,7 +822,7 @@ transform: translateY(-2px) scale(1.01);
 }
 .sales-badge {
   position: absolute;
-  top: 18px;
+  top: 8px;
   left: 18px;
   padding: 6px 16px 6px 12px;
   border-radius: 12px;
@@ -823,6 +834,60 @@ transform: translateY(-2px) scale(1.01);
   align-items: center;
   z-index: 2;
 }
+
+
+.summary-slider {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.summary-slider .slick-prev,
+.summary-slider .slick-next {
+  z-index: 2;
+  background: linear-gradient(90deg, rgba(50,205,50,1) 0%, rgba(34,139,34,1) 100%) !important;
+  border-radius: 50%;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  opacity: 1 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.slick-arrow{
+  display: none !important;
+  transition: all 0.2s ease-in-out;
+}
+.slick-slider:hover .slick-arrow {
+  display: block !important;
+}
+
+.summary-slider .slick-prev:before,
+.summary-slider .slick-next:before {
+  color: #fff;
+  font-size: 18px;
+}
+
+.summary-slider .slick-prev {
+  left: 0px;
+}
+
+.summary-slider .slick-next {
+  right: 0px;
+}
+
+.summary-slider .slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
+
+.summary-slider .slick-prev:before, .summary-slider .slick-next:before{
+  color: #fff !important;
+   font-size: 18px !important;
+}
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus{
+background: linear-gradient(90deg, rgba(50,205,50,1) 0%, rgba(34,139,34,1) 100%) !important;
+}
+
 .sales-flex-row {
   display: flex;
   flex-direction: row;
@@ -1363,9 +1428,9 @@ transform: translateY(-2px) scale(1.01);
 .category-card-vertical {
   transition: all 0.2s;
 }
-.category-sidebar.collapsed .category-card-vertical {
+/* .category-sidebar.collapsed .category-card-vertical {
   padding: 4px 0 4px 0;
-}
+} */
 .category-sidebar.collapsed .category-card-name-vertical {
   font-size: 0.7rem;
   margin-top: 0;

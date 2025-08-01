@@ -46,6 +46,10 @@
   flex-direction: column;
   gap: 24px;
 }
+.checkout-cart-items{
+  width: 80%;
+  margin: 0 auto;
+}
 .checkout-cart-items h4,
 .checkout-addons-section h4 {
   margin: 0 0 10px 0;

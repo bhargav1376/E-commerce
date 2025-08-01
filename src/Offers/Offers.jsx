@@ -110,6 +110,8 @@ function Offers() {
       desc: 'Save 10% on fresh carrots.',
       badge: '10% OFF',
       type: 'Recommended',
+      category: 'vegetables',
+      name: 'carrot',
     },
     {
       img: 'https://cdn.zeptonow.com/production/tr:w-1280,ar-3000-3000,pr-true,f-auto,q-80/cms/product_variant/19885a90-eef8-4b09-b17d-3ecf3200caf7.jpeg',
@@ -117,6 +119,8 @@ function Offers() {
       desc: 'Flat ₹50 off on pineapples.',
       badge: '₹50 OFF',
       type: 'Recommended',
+      category: 'Fruits',
+      name: 'pineapple',
     },
     {
       img: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=400&q=80',
@@ -124,6 +128,8 @@ function Offers() {
       desc: 'Special price on apples for members.',
       badge: 'Member Deal',
       type: 'Recommended',
+      category: 'Fruits',
+      name: 'Apple',
     },
   ];
 
@@ -367,8 +373,7 @@ function Offers() {
                   <div className="offer-content">
                     <h4 className="offer-title">{offer.title}</h4>
                     <p className="offer-desc">{offer.desc}</p>
-                    <button className="offer-btn" onClick={e => {e.stopPropagation();  navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
-}}>Get Deal</button>
+                    <button className="offer-btn" onClick={e => {e.stopPropagation();  navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);}}>Get Deal</button>
                   </div>
                 </div>
               ))}
@@ -380,7 +385,7 @@ function Offers() {
             <h3 className="offers-section-title">💡 Recommended for You</h3>
             <div className="offers-grid">
               {recommended.map((offer, idx) => (
-                <div className="offer-card recommended" key={idx} style={{cursor:'pointer'}} onClick={() => navigate(getOfferNavPath(offer))}>
+                <div className="offer-card recommended" key={idx} style={{cursor:'pointer'}} onClick={() =>  navigate(`/products?category=${encodeURIComponent(offer.category.toLowerCase())}=${encodeURIComponent(offer.name)}`)}>
                   <div className="offer-img-wrap">
                     <img src={offer.img} alt={offer.title} className="offer-img" />
                     <span className="offer-badge recommended-badge">{offer.badge}</span>
@@ -388,7 +393,7 @@ function Offers() {
                   <div className="offer-content">
                     <h4 className="offer-title">{offer.title}</h4>
                     <p className="offer-desc">{offer.desc}</p>
-                    <button className="offer-btn" onClick={e => {e.stopPropagation(); navigate(getOfferNavPath(offer));}}>Get Deal</button>
+                    <button className="offer-btn" onClick={e => {e.stopPropagation();  navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);}}>Get Deal</button>
                   </div>
                 </div>
               ))}

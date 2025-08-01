@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Products.css';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAppleAlt, faCheckCircle, faShoppingCart, faHeart, faChevronRight  ,faHome, faUser, faTag, faCog, faBars, faChevronLeft, faChevronDown, faChevronUp, faSignOutAlt, faGlobe, faBell, faSearch, faTrash, faFire, faChartLine, faStar, faExpand, faCompress, faHeart as faHeartFilled, faQuestionCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
@@ -3397,35 +3400,78 @@ function Products() {
 
   // Get category from URL parameters
   const query = useQuery();
-  const categoryFromUrl = query.get('category');
+const categoryFromUrl = query.get('category');
 
-  // After categoryFromUrl, add logic to parse product name from query
-  const productNameFromUrl = (() => {
-    if (!categoryFromUrl) return null;
-    const parts = categoryFromUrl.split('=');
-    return parts.length > 1 ? parts[1] : null;
-  })();
+let categoryParam = null;
+let productNameFromUrl = null;
 
-  // Set initial category from URL if present
+if (categoryFromUrl) {
+  const parts = categoryFromUrl.split('=');
+  // Try to match the category from the categories array (case-insensitive, ignore spaces)
+  const rawCategory = decodeURIComponent(parts[0] || '');
+  // categories array is defined below, so we need to use a fallback if not available yet
+  // We'll use a localCategories array for this parsing
+  const localCategories = [
+    'All', 'New Arrivals', 'Mango Mania', 'Saver Combo',
+    'Fruits', 'Vegetables', 'Electronics', 'Home', 'Dairy', 'Bakery', 'Snacks', 'Beverages',
+    'Personal Care', 'Stationery', 'Toys', 'Pet Supplies'
+  ];
+  categoryParam = localCategories.find(cat => cat.replace(/\s+/g, '').toLowerCase() === rawCategory.replace(/\s+/g, '').toLowerCase()) || null;
+
+  // If product name is also present (e.g., Mango Mania=carrot)
+  if (parts.length > 1) {
+    productNameFromUrl = decodeURIComponent(parts[1]);
+  }
+}
+
+
+  // Set initial category from URL if present, and open modal for product if present
   useEffect(() => {
-    if (categoryFromUrl) {
-      const parts = categoryFromUrl.split('=');
-      setSelectedCategory(parts[0]);
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
     }
-  }, [categoryFromUrl]);
+  }, [categoryParam]);
 
-  // Open modal for product if productNameFromUrl is present
+  // Open modal for product if productNameFromUrl is present, but do NOT filter the grid
   useEffect(() => {
     if (productNameFromUrl) {
-      // Find product in the selected category (case-insensitive)
-      const match = allProducts.find(
-        p => p.category === selectedCategory && p.name.toLowerCase() === productNameFromUrl.toLowerCase()
+      let match = null;
+      // Always use the selectedCategory (which is set by categoryParam above)
+      match = allProducts.find(
+        p => p.category.toLowerCase() === (categoryParam ? categoryParam.toLowerCase() : selectedCategory.toLowerCase()) && p.name.toLowerCase() === productNameFromUrl.toLowerCase()
       );
+      // If not found in category, or no category, search all categories
+      if (!match) {
+        match = allProducts.find(
+          p => p.name.toLowerCase() === productNameFromUrl.toLowerCase()
+        );
+      }
       if (match) setProductModal(match);
     }
     // Only run on mount or when category/productNameFromUrl changes
     // eslint-disable-next-line
-  }, [selectedCategory, productNameFromUrl]);
+  }, [categoryParam, productNameFromUrl, selectedCategory]);
+
+  // Open modal for product if productNameFromUrl is present, but do NOT filter the grid
+  useEffect(() => {
+    if (productNameFromUrl) {
+      let match = null;
+      if (categoryParam) {
+        match = allProducts.find(
+          p => p.category.toLowerCase() === categoryParam.toLowerCase() && p.name.toLowerCase() === productNameFromUrl.toLowerCase()
+        );
+      }
+      // If not found in category, or no category, search all categories
+      if (!match) {
+        match = allProducts.find(
+          p => p.name.toLowerCase() === productNameFromUrl.toLowerCase()
+        );
+      }
+      if (match) setProductModal(match);
+    }
+    // Only run on mount or when category/productNameFromUrl changes
+    // eslint-disable-next-line
+  }, [categoryParam, productNameFromUrl]);
 
   // Auto-close cart modal when cart becomes empty
   useEffect(() => {
@@ -3453,6 +3499,23 @@ function Products() {
     (p.discount || 0) > (max.discount || 0) ? p : max, { discount: 0 }
   );
 
+  // Find New Arrival (latest added product - for now, pick the last product in category)
+const newArrivalProduct = productsInCategory.length > 0 
+  ? productsInCategory[productsInCategory.length - 1] 
+  : null;
+
+// Find Most Reviewed (highest reviews)
+const mostReviewedProduct = productsInCategory.reduce((max, p) =>
+  (p.reviews || 0) > (max.reviews || 0) ? p : max, { reviews: 0 }
+);
+
+// Find Top Rated (highest rating)
+const topRatedProduct = productsInCategory.reduce((max, p) =>
+  (p.rating || 0) > (max.rating || 0) ? p : max, { rating: 0 }
+);
+
+
+
   // Find Trending Product (highest price, not Top Discount)
   const trendingProduct = productsInCategory
     .filter(p => p.id !== topDiscountProduct.id)
@@ -3463,39 +3526,58 @@ function Products() {
     .filter(p => p.id !== topDiscountProduct.id && p.id !== trendingProduct.id)
     .reduce((max, p) => (p.discount || 0) > (max.discount || 0) ? p : max, { discount: 0 });
 
+
+    
+
   // Build summary cards, ensuring uniqueness and filling with placeholders if needed
   const summaryCards = [
-    {
-      title: 'Top Discount',
-      product: topDiscountProduct && topDiscountProduct.discount > 0 ? topDiscountProduct : null,
-      placeholder: 'No Discount Product'
-    },
-    {
-      title: 'Trending Product',
-      product: trendingProduct && trendingProduct.name ? trendingProduct : null,
-      placeholder: 'No Trending Product'
-    },
-    {
-      title: 'Best Seller',
-      product: bestSellerProduct && bestSellerProduct.discount > 0 ? bestSellerProduct : null,
-      placeholder: 'No Best Seller'
-    }
-  ];
+  {
+    title: 'Top Discount',
+    product: topDiscountProduct && topDiscountProduct.discount > 0 ? topDiscountProduct : null,
+    placeholder: 'No Discount Product'
+  },
+  {
+    title: 'Trending Product',
+    product: trendingProduct && trendingProduct.name ? trendingProduct : null,
+    placeholder: 'No Trending Product'
+  },
+  {
+    title: 'Best Seller',
+    product: bestSellerProduct && bestSellerProduct.discount > 0 ? bestSellerProduct : null,
+    placeholder: 'No Best Seller'
+  },
+  {
+    title: 'New Arrival',
+    product: newArrivalProduct && newArrivalProduct.name ? newArrivalProduct : null,
+    placeholder: 'No New Arrival'
+  },
+  {
+    title: 'Most Reviewed',
+    product: mostReviewedProduct && mostReviewedProduct.reviews > 0 ? mostReviewedProduct : null,
+    placeholder: 'No Reviewed Product'
+  },
+  {
+    title: 'Top Rated',
+    product: topRatedProduct && topRatedProduct.rating > 0 ? topRatedProduct : null,
+    placeholder: 'No Rated Product'
+  }
+];
+
+
+
   // --- End filtering logic ---
 
   // Exclude summary card products from the grid
   const summaryProductIds = summaryCards.map(card => card.product && card.product.id).filter(Boolean);
   let filteredProducts;
   if (selectedCategory === 'New Arrivals') {
-    // Get the latest 13 products
+    // ...existing code...
     const latestProducts = allProducts.filter(product => product.id > allProducts.length - 13);
     const latestIds = new Set(latestProducts.map(p => p.id));
-    // For each category, pick the first product not already in latestProducts
     const categoriesSet = new Set(allProducts.map(p => p.category));
     const oneFromEachCategory = Array.from(categoriesSet).map(cat =>
       allProducts.find(p => p.category === cat && !latestIds.has(p.id))
     ).filter(Boolean);
-    // Merge and deduplicate
     const allNewArrivals = [...latestProducts, ...oneFromEachCategory];
     const seen = new Set();
     filteredProducts = allNewArrivals.filter(p => {
@@ -3712,16 +3794,22 @@ function Products() {
       {/* Category sidebar */}
       <aside className={`category-sidebar${collapsed ? ' collapsed' : ''}`}>
         <div className="category-cards-vertical">
-          {categories.map(cat => (
-            <div
-              key={cat}
-              className={`category-card-vertical${selectedCategory === cat ? ' selected' : ''}`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              <img src={categoryImages[cat] || categoryImages['All']} alt={cat} className="category-card-img-vertical" />
-              <span className="category-card-name-vertical">{cat}</span>
-            </div>
-          ))}
+          {categories.map(cat => {
+            // Use categoryParam from URL if present, otherwise fallback to selectedCategory state
+            const isSelected = (categoryParam ? categoryParam : selectedCategory) === cat;
+            return (
+              <div
+                key={cat}
+                className={`category-card-vertical${isSelected ? ' selected' : ''}`}
+                onClick={() => {
+                  navigate(`/products?category=${encodeURIComponent(cat)}`);
+                }}
+              >
+                <img src={categoryImages[cat] || categoryImages['All']} alt={cat} className="category-card-img-vertical" />
+                <span className="category-card-name-vertical">{cat}</span>
+              </div>
+            );
+          })}
         </div>
       </aside>
       {/* Main Content */}
@@ -3815,9 +3903,9 @@ function Products() {
             </div>
           )}
           {/* --- Category summary section --- */}
-          {selectedCategory === 'New Arrivals' && (
+             {/* Slideshow for New Arrivals */}
+          {/* {selectedCategory === 'New Arrivals' && (
             <>
-              {/* Slideshow for New Arrivals */}
               <div className="new-arrivals-slideshow" style={{marginBottom: 24, position: 'relative', width: '100%', marginLeft: 'auto', marginRight: 'auto'}}>
                 <img src={newArrivalsSlides[slideIdx]} alt="New Arrival Slide" style={{width: '100%', height: 260, objectFit: 'cover', borderRadius: 16, boxShadow: '0 4px 24px rgba(70,130,169,0.10)'}} />
                 <div style={{position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8}}>
@@ -3829,23 +3917,37 @@ function Products() {
                 <button style={{position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, fontSize: 18, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}} onClick={() => setSlideIdx((slideIdx + 1) % newArrivalsSlides.length)}>&gt;</button>
               </div>
             </>
-          )}
-          {['All', 'Fruits', 'Vegetables', 'Electronics', 'Home', 'Dairy', 'Bakery', 'Snacks', 'Beverages', 'Personal Care', 'Stationery', 'Toys', 'Pet Supplies'].includes(selectedCategory) && (
+          )} */}
+          {['All', 'New Arrivals',  'Fruits', 'Vegetables', 'Electronics', 'Home', 'Dairy', 'Bakery', 'Snacks', 'Beverages', 'Personal Care', 'Stationery', 'Toys', 'Pet Supplies'].includes(selectedCategory) && (
             <div className="category-summary">
               <div className="summary-cards-row large">
-                {summaryCards.map(({ title, product, placeholder }, idx) => (
-                  <SummaryProductCard
-                    key={title}
-                    title={title}
-                    product={product}
-                    placeholder={placeholder}
-                    notified={notified}
-                    setNotified={setNotified}
-                    addToCart={addToCart}
-                    cart={cart}
-                    updateQty={updateQty}
-                  />
-                ))}
+                <Slider 
+                    className="summary-slider"
+                    arrows={true}
+                    dots={false}
+                    infinite={true}
+                    speed={500}
+                    slidesToShow={3}
+                    slidesToScroll={1}
+                    autoplay={true}
+                    autoplaySpeed={1800}
+                  >
+                    {summaryCards.map(({ title, product, placeholder }) => (
+<SummaryProductCard
+  key={title}
+  title={title}
+  product={product}
+  placeholder={placeholder}
+  notified={notified}
+  setNotified={setNotified}
+  addToCart={addToCart}
+  cart={cart}
+  updateQty={updateQty}
+  wishlist={wishlist}
+  handleWishlist={handleWishlist}
+/>
+                    ))}
+                  </Slider>
               </div>
             </div>
           )}
@@ -3854,7 +3956,7 @@ function Products() {
           {filteredProducts.length === 0 ? (
             <div style={{ textAlign: 'center', color: '#b91c1c', fontWeight: 600, fontSize: '1.2rem', marginTop: 40 }}>No products found</div>
           ) : (
-            <div className="products-grid">
+            <div className={`products-grid${collapsed ? ' sidebar-collapsed' : ''}`}> 
               {filteredProducts.map(product => {
                 const cartItem = cart.find(item => item.id === product.id);
                 const inWishlist = wishlist.includes(product.id);
@@ -4326,31 +4428,51 @@ function Products() {
    );
  }
 
- function SummaryProductCard({ title, product, placeholder, notified, setNotified, addToCart, cart, updateQty }) {
-   // Choose icon and badge color based on card type
-   let icon, badgeColor, badgeBg;
-   if (title === 'Top Discount') {
-     icon = faFire;
-     badgeColor = '#fff';
-     badgeBg = '#ef4444'; // red
-   } else if (title === 'Trending Product') {
-     icon = faChartLine;
-     badgeColor = '#fff';
-     badgeBg = '#3b82f6'; // blue
-   } else if (title === 'Best Seller') {
-     icon = faStar;
-     badgeColor = '#fff';
-     badgeBg = '#f59e0b'; // amber
-   }
-   if (!product) {
-     return (
-       <div className="summary-card large placeholder sales-summary-card">
-         <div className="sales-badge" style={{background: '#e5e7eb', color: '#6b7280'}}>{title}</div>
-         <div className="summary-product-placeholder">{placeholder}</div>
-       </div>
-     );
-   }
-   const cartItem = cart.find(item => item.id === product.id);
+function SummaryProductCard({ title, product, placeholder, notified, setNotified, addToCart, cart, updateQty, wishlist, handleWishlist }) {
+  // Choose icon and badge color based on card type
+  let icon, badgeColor, badgeBg;
+
+if (title === 'Top Discount') {
+  icon = faFire;
+  badgeColor = '#fff';
+  badgeBg = '#ef4444'; // red
+} 
+else if (title === 'Trending Product') {
+  icon = faChartLine;
+  badgeColor = '#fff';
+  badgeBg = '#3b82f6'; // blue
+} 
+else if (title === 'Best Seller') {
+  icon = faStar;
+  badgeColor = '#fff';
+  badgeBg = '#f59e0b'; // amber
+} 
+else if (title === 'New Arrival') {
+  icon = faTag;
+  badgeColor = '#fff';
+  badgeBg = '#10b981'; // green
+} 
+else if (title === 'Most Reviewed') {
+  icon = faCheckCircle;
+  badgeColor = '#fff';
+  badgeBg = '#8b5cf6'; // purple
+} 
+else if (title === 'Top Rated') {
+  icon = faHeart;
+  badgeColor = '#fff';
+  badgeBg = '#ec4899'; // pink
+}
+
+  const inWishlist = wishlist && product ? wishlist.includes(product?.id) : false;
+  if (!product) {
+    return (
+      <div className="summary-card large placeholder sales-summary-card">
+        <div className="sales-badge" style={{background: '#e5e7eb', color: '#6b7280'}}>{title}</div>
+        <div className="summary-product-placeholder">{placeholder}</div>
+      </div>
+    );
+  }
+  const cartItem = cart.find(item => item.id === product.id);
    return (
      <div className="summary-card large sales-summary-card">
        <div className="sales-badge" style={{background: badgeBg, color: badgeColor}}>
@@ -4366,7 +4488,32 @@ function Products() {
              <span className="summary-outofstock-badge">Out of Stock</span>
            )}
          </>
+         <div className="summary-product-rating-row">
+        <button
+  className="wishlist-heart-btn"
+  style={{
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    border: 'none',
+    background: inWishlist ? 'rgba(255,255,255,0.85)' : 'rgba(255,182,182,1)',
+    borderRadius: '50%',
+    padding: 7,
+    cursor: 'pointer',
+    boxShadow: '0 1px 4px rgba(0,0,0,0.10)'
+  }}
+  onClick={e => { e.stopPropagation(); handleWishlist(product.id); }}
+  title={inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+>
+  <FontAwesomeIcon
+    icon={inWishlist ? faHeartFilled : faHeart}
+    style={{ color: inWishlist ? '#ef4444' : '#fff', fontSize: '1.3em' }}
+  />
+</button>
+
        </div>
+       </div>
+       
        <div className="summary-product-name">{product.name}</div>
        <div className="summary-product-row-flex sales-flex-row">
          <div className="summary-product-left-block">
