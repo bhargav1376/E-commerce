@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../Index/Dashboard.css';
 import './Offers.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faChevronDown, faChevronUp, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faChevronDown,faChevronRight,faChevronLeft, faChevronUp, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 import Homeicon from '../Images/Home-png.png';
 import producticon from '../Images/Product-png.png';
 import ordersicon from '../Images/order-png.webp';
@@ -18,6 +18,9 @@ import cartheadericon from '../Images/cart-header-png.png';
 import tagicon from '../Images/tag-png.png';
 import logo from '../Images/unnamed.png';
 import { useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const user = {
   name: 'Bhargav',
@@ -99,8 +102,48 @@ function Offers() {
       badge: 'BOGO',
       type: 'Limited Time',
       timer: 'Ends in 03:21:10',
-      name : 'strawberry',
+      name: 'strawberry',
       category: 'Fruits',
+    },
+    {
+      img: 'https://cdn.zeptonow.com/production/tr:w-1280,ar-500-357,pr-true,f-auto,q-80/inventory/product/640a9531-ad5a-4e2a-88cc-3ab461154895-d1edf8d4-76cb-450e-836b-8ceaaa79025d.jpeg',
+      title: 'Grapes Gala',
+      desc: 'Only 5 left in stock!',
+      badge: '5 Left',
+      type: 'Limited Time',
+      timer: 'Ends in 02:10:45',
+      name: 'grapes',
+      category: 'Fruits',
+    },
+    {
+      img: 'https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/j/a/b/-original-imah83eztbdcsknu.jpeg?q=70&crop=false',
+      title: 'MOTOROLA g05 ',
+      desc: 'Special price on MOTOROLA g05!',
+      badge: 'Special',
+      type: 'Limited Time',
+      timer: 'Ends in 01:55:30',
+      name: 'MOTOROLA g05 (Forest Green, 64 GB) (4 GB RAM)',
+      category: 'Electronics',
+    },
+    {
+      img: 'https://m.media-amazon.com/images/I/61duEBwvXdL._SX679_.jpg',
+      title: 'Amul Butter Salted',
+      desc: '5% off on Amul Butter Salted!',
+      badge: 'BOGO',
+      type: 'Limited Time',
+      timer: 'Ends in 04:00:00',
+      name: 'Amul Butter Salted',
+      category: 'Dairy',
+    },
+    {
+      img: 'https://icecreambakery.in/wp-content/uploads/2024/12/Brownie-Recipe-with-Cocoa-Powder.jpg',
+      title: 'Chocolate Brownie',
+      desc: '3% off on all chocolates!',
+      badge: '3% OFF',
+      type: 'Limited Time',
+      timer: 'Ends in 00:45:20',
+      name: 'chocolate brownie',
+      category: 'Bakery',
     },
   ];
   const recommended = [
@@ -174,6 +217,23 @@ function Offers() {
         return user.image;
       }
     });
+
+  const limitedSliderSettings = {
+    dots: false,
+    arrows: false, // We'll use custom arrows
+    infinite: true,
+    speed: 600,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    responsive: [
+      { breakpoint: 900, settings: { slidesToShow: 2 } },
+      { breakpoint: 600, settings: { slidesToShow: 1 } }
+    ]
+  };
+
+  const sliderRef = useRef();
 
   return (
     <div className={`dashboard-container${collapsed ? ' collapsed' : ''}`}> 
@@ -356,27 +416,49 @@ function Offers() {
           {/* Limited Time Offers Section */}
           <section className="offers-section">
             <h3 className="offers-section-title">⏰ Limited Time Offers</h3>
-            <div className="offers-grid">
-              {limitedTime.map((offer, idx) => (
-                <div className="offer-card limited" key={idx} style={{cursor:'pointer'}} onClick={() => {
-                  if (offer.title && offer.title.toLowerCase().includes('strawberry')) {
+            <div style={{position: 'relative'}}>
+              <button
+                className="limited-btn left"
+                onClick={() => sliderRef.current && sliderRef.current.slickPrev()}
+                aria-label="Previous"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </button>
+              <button
+                className="limited-btn right"
+                onClick={() => sliderRef.current && sliderRef.current.slickNext()}
+                aria-label="Next"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faChevronRight} />
+              </button>
+              <Slider ref={sliderRef} {...limitedSliderSettings} className="offers-slider">
+                {limitedTime.map((offer, idx) => (
+                  <div className="offer-card limited" key={idx} style={{cursor:'pointer', margin: 10}} onClick={() => {
                     navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
-                  } else {
-                    navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
-                  }
-                }}>
-                  <div className="offer-img-wrap heig-og ">
-                    <img src={offer.img} alt={offer.title} className="offer-img" />
-                    <span className="offer-badge limited-badge">{offer.badge}</span>
-                    <span className="offer-timer">{offer.timer}</span>
+                  }}>
+                    <div className="offer-img-wrap heig-og ">
+                      <img src={offer.img} alt={offer.title} className="offer-img" />
+                      <span className="offer-badge limited-badge">{offer.badge}</span>
+                      <span className="offer-timer">{offer.timer}</span>
+                    </div>
+                    <div className="offer-content">
+                      <h4 className="offer-title">{offer.title}</h4>
+                      <p className="offer-desc">{offer.desc}</p>
+                      <button
+                        className="offer-btn animated-green"
+                        onClick={e => {
+                          e.stopPropagation();
+                          navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);
+                        }}
+                      >
+                        Get Deal
+                      </button>
+                    </div>
                   </div>
-                  <div className="offer-content">
-                    <h4 className="offer-title">{offer.title}</h4>
-                    <p className="offer-desc">{offer.desc}</p>
-                    <button className="offer-btn" onClick={e => {e.stopPropagation();  navigate(`/products?category=${encodeURIComponent(offer.category)}=${encodeURIComponent(offer.name)}`);}}>Get Deal</button>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </Slider>
             </div>
           </section>
 

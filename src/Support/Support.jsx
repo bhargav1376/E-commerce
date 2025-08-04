@@ -443,7 +443,7 @@ function Support() {
           </header>
           {/* Support Page Content */}
           <div className="dashboard-page-content">
-            <h2 style={{marginTop: 0}}>Support Center</h2>
+            <h2 className='sup-cen' >Support Center</h2>
             <div className="support-help-topics-nav">
               {helpTopics.map(topic => (
                 <button
@@ -522,8 +522,8 @@ function Support() {
           <div className="support-modal" onClick={e => e.stopPropagation()}>
             <button className="support-modal-close" onClick={() => setShowContactModal(false)}><FontAwesomeIcon icon={faTimes} /></button>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8}}>
-              <FontAwesomeIcon icon={faEnvelope} style={{color: '#2563eb', fontSize: 24}} />
-              <h3 style={{margin: 0}}>Contact Support</h3>
+              <FontAwesomeIcon icon={faEnvelope} style={{color: '#228B22', fontSize: 24}} />
+              <h3 className='lat-for'  style={{margin: 0}}>Contact Support</h3>
             </div>
             <form className="support-contact-form" onSubmit={handleContactSubmit}>
               <label>Name</label>
@@ -578,8 +578,8 @@ function Support() {
         <div className="support-modal-overlay" onClick={() => setShowContactDetails(false)}>
           <div className="support-modal contact-details-modal" onClick={e => e.stopPropagation()}>
             <button className="support-modal-close" onClick={() => setShowContactDetails(false)}><FontAwesomeIcon icon={faTimes} /></button>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8}}>
-              <FontAwesomeIcon icon={faInfoCircle} style={{color: '#2563eb', fontSize: 26}} />
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20}}>
+              <FontAwesomeIcon icon={faInfoCircle} style={{color: '#228B22', fontSize: 26}} />
               <h3 style={{margin: 0}}>Contact Details</h3>
             </div>
             <div className="support-contact-details-content">
@@ -621,10 +621,10 @@ function Support() {
                 )}
               </div>
             </div>
-            <div style={{marginTop: 18, color: '#64748b', fontSize: '0.98rem'}}>
-              <b>Location Map:</b> <span style={{color:'#2563eb'}}>Map integration coming soon</span>
+            <div className='location-map-s' >
+              <b>Location Map:</b> <span className='spa-map'> Map integration coming soon</span>
             </div>
-            <div style={{marginTop: 18, color: '#185a9d', fontWeight: 500, fontSize: '1.05rem'}}>
+            <div className='lat-for' >
               For urgent queries, call us or use Live Chat for instant help!
             </div>
           </div>

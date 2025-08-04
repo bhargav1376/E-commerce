@@ -3761,8 +3761,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
   } else {
     filteredProducts = allProducts.filter(product => {
       let matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-      return matchesCategory && product.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-            && !summaryProductIds.includes(product.id);  // <- This removes them
+      return matchesCategory && product.name.toLowerCase().includes(searchTerm.toLowerCase()) && !summaryProductIds.includes(product.id);
     });
   }
 
@@ -4718,10 +4717,10 @@ else if (title === 'Top Rated') {
              <span className="summary-product-price sales-price">
                {product.discount ? (
                  <>
-                   <span className="summary-old-price">₹{product.price.toLocaleString('en-IN', {minimumFractionDigits: 2})}</span> <span className="summary-sales-new-price-one">₹{(product.price * (1 - product.discount / 100)).toLocaleString('en-IN', {minimumFractionDigits: 2})}</span>
+                   <span className="old-price">₹{product.price.toLocaleString('en-IN', {minimumFractionDigits: 2})}</span> <span className="sales-new-price">₹{(product.price * (1 - product.discount / 100)).toLocaleString('en-IN', {minimumFractionDigits: 2})}</span>
                  </>
                ) : (
-                 <> <span className='summary-sales-new-price'> ₹{product.price.toLocaleString('en-IN', {minimumFractionDigits: 2})}</span></>
+                 <> <span className='sales-new-price'> ₹{product.price.toLocaleString('en-IN', {minimumFractionDigits: 2})}</span></>
                )}
              </span>
            </div>
@@ -4773,11 +4772,6 @@ else if (title === 'Top Rated') {
      </div>
    );
  }
-
-// line no 3674 &&  return matchesCategory && product.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-//       && !summaryProductIds.includes(product.id);
-// replace to this 
-//  return matchesCategory && product.name.toLowerCase().includes(searchTerm.toLowerCase())
 
  export { allProducts };
  export default Products;

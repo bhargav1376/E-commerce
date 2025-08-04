@@ -49,12 +49,12 @@
   border-color: #60faaf;
 }
 .heig-og{
-  height: 320px !important;
+  height: 220px !important;
 }
 .offer-img-wrap {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 150px;
   background: #f1f5f9;
   display: flex;
   align-items: center;
@@ -112,6 +112,7 @@
   flex: 1;
 }
 .offer-title {
+  margin-top: 2px;
   font-size: 1.18rem;
   font-weight: 700;
   color: #1e293b;
@@ -138,6 +139,83 @@
 .offer-btn:hover {
   background:linear-gradient(45deg, #3CB371, #228B22);
   box-shadow: 0 4px 16px rgba(37,99,235,0.18);
+}
+
+.animated-green {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 28px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.13);
+  transition: background 0.4s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.animated-green::after {
+  content: "";
+  position: absolute;
+  left: -75%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255,255,255,0.18);
+  transform: skewX(-20deg);
+  transition: left 0.5s;
+}
+.animated-green:hover {
+  background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+.animated-green:hover::after {
+  left: 120%;
+}
+
+.offers-slider .offer-card {
+  margin: 10px 10px 10px 0px !important; 
+  width: calc(100% - 20px);
+  display: inline-block;
+}
+.offers-slider .slick-slide > div {
+  padding: 0 10px;
+}
+
+.offers-section:hover .limited-btn{
+  display: block;
+}
+
+.limited-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  background: #e5f9f3;
+  color: #10b981;
+  border: 1px solid #10b981;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.10);
+  outline: none;
+}
+.limited-btn.left {
+  left: -18px;
+}
+.limited-btn.right {
+  right: -18px;
+}
+.limited-btn:hover {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  color: #fff;
 }
 
 @media (max-width: 900px) {

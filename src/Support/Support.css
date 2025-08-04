@@ -71,7 +71,7 @@
   outline: none;
 }
 .support-contact-form button {
-  background: #3b82f6;
+  background: linear-gradient(90deg, #11998e 0%, #185a9d 100%);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -80,9 +80,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  width: 100%;
 }
 .support-contact-form button:hover {
-  background: #2563eb;
+  background: linear-gradient(45deg, #185a9d 0%, #11998e 100%);
 }
 
 /* FAQ Accordion */
@@ -93,11 +94,11 @@
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 16px;
-  color: #2563eb;
+  color: #059669;
 }
 .support-faq-list {
   border-radius: 8px;
-  background: #f1f5f9;
+  background: #f2fff4;
   padding: 12px 0;
 }
 .support-faq-item {
@@ -111,15 +112,17 @@
   padding: 16px 20px;
   font-size: 1.08rem;
   font-weight: 600;
-  color: #334155;
+  color: #059669;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: background 0.2s;
+  border-radius: 4px;
 }
 .support-faq-question:hover {
-  background: #e0e7ef;
+  background: #059669;
+  color: #fff;
 }
 .support-faq-answer {
   padding: 15px 24px 16px 24px;
@@ -154,10 +157,18 @@
   flex-wrap: wrap;
   margin-bottom: 24px;
 }
+.sup-cen{
+  margin-top: 0px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  /* color: #059669; */
+  margin-bottom: 20px;
+}
 .support-help-topic-btn {
   background: #f1f5f9;
-  color: #2563eb;
-  border: 1px solid #cbd5e1;
+  color: #228B22;
+  border: 1px solid #b1fcc5;
   border-radius: 6px;
   padding: 8px 18px;
   font-size: 1rem;
@@ -165,31 +176,28 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.support-help-topic-btn.active,
+.support-help-topic-btn.active{
+  background: #228B22;
+  color: #fff;
+}
 .support-help-topic-btn:hover {
-  background: #2563eb;
+  background: #58af58;
   color: #fff;
 }
 
 /* Contact Details */
 .support-contact-details {
-  background: #f1f5f9;
+  background: #f1f9f6;
   border-radius: 8px;
   padding: 18px 24px;
   margin: 32px 0;
-  color: #334155;
+  color: #228B22;
   font-size: 1.08rem;
   /* display: flex;
   flex-direction: column; */
   gap: 8px;
 }
-.support-contact-details .support-contact-more {
-  color: #2563eb;
-  cursor: pointer;
-  text-decoration: underline;
-  margin-top: 8px;
-  font-weight: 600;
-}
+
 
 /* Feedback Modal */
 .support-feedback-stars {
@@ -222,7 +230,7 @@
   position: relative;
 }
 .support-live-chat-header {
-  background: linear-gradient(90deg, #2563eb 0%, #1e293b 100%);
+  background: linear-gradient(45deg, #185a9d 0%, #11998e 100%);
   color: #fff;
   padding: 18px 24px;
   font-size: 1.2rem;
@@ -241,7 +249,9 @@
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: red;
+  color: #fff;
+  border: 1px solid transparent;
+  background: red;
   box-shadow: 0 8px 32px rgba(37,99,235,0.18), 0 2px 8px rgba(0,0,0,0.08);
   cursor: pointer;
   z-index: 10;
@@ -252,8 +262,9 @@
   border-radius: 4px;
 }
 .support-modal-close:hover {
-  color: #fff;
-  background: red;
+  color: red;
+  background: #fff;
+  border: 1px solid red;
   opacity: 1;
 }
 
@@ -315,12 +326,12 @@
 
 /* More Info Button */
 .support-contact-details .support-contact-more {
-  color: #2563eb;
+  color: #fff;
   cursor: pointer;
   text-decoration: none;
   margin-top: 8px;
   font-weight: 600;
-  background: #e0e7ef;
+  background: linear-gradient(90deg, #228B22 0%, #059669 100%);
   border-radius: 6px;
   padding: 8px 18px;
   display: inline-block;
@@ -331,7 +342,7 @@
   border: none;
 }
 .support-contact-details .support-contact-more:hover {
-  background: #2563eb;
+   background: linear-gradient(45deg, #059669 0%, #228B22 100%);
   color: #fff;
 }
 
@@ -347,7 +358,7 @@
   animation: fadeIn 0.2s;
 }
 .support-contact-details-content {
-  color: #185a9d;
+  color: #228B22;
   font-size: 1.08rem;
   margin-bottom: 18px;
 }
@@ -358,9 +369,9 @@
   margin-top: 10px;
 }
 .support-dropdown-toggle {
-  background: #2563eb;
-  color: #fff;
-  border: none;
+  background: #fff;
+  color: #228B22;
+  border: 1px solid #38ef7d;
   border-radius: 8px;
   padding: 8px 18px;
   font-size: 1rem;
@@ -370,7 +381,8 @@
   transition: background 0.2s;
 }
 .support-dropdown-toggle:hover {
-  background: #1d4ed8;
+  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+  color: #fff;
 }
 .support-dropdown-content {
   background: #e0e7ef;
@@ -413,19 +425,19 @@
   transition: background 0.2s, color 0.2s;
 }
 .support-live-chat-bubble.user {
-  background: linear-gradient(90deg, #dbeafe 60%, #f1f5f9 100%);
-  color: #222;
+  background: linear-gradient(90deg, #ebfdf5 60%, #f3fcf2 100%);
+  color: #228B22;
   align-self: flex-end;
   margin-left: auto;
-  border: 1.5px solid #2563eb;
+  border: 1.5px solid #059669;
   box-shadow: 0 2px 8px rgba(37,99,235,0.10);
 }
 .support-live-chat-bubble.support {
-  background: #e0e7ef;
-  color: #185a9d;
+  background: #f1f7f1;
+  color: #189d2e;
   align-self: flex-start;
   margin-right: auto;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid #cbe1cd;
   box-shadow: 0 2px 8px rgba(30,41,59,0.06);
 }
 
@@ -448,7 +460,7 @@
 }
 .support-live-chat-input-row input {
   flex: 1;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid #cbe1cd;
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 1.05rem;
@@ -457,7 +469,7 @@
   outline: none;
 }
 .support-live-chat-input-row input:focus {
-  border: 1.5px solid #2563eb;
+  border: 1.5px solid #228B22;
   box-shadow: 0 2px 8px rgba(37,99,235,0.10);
 }
 .support-live-chat-input-row input::placeholder {
@@ -466,7 +478,7 @@
   opacity: 1;
 }
 .support-live-chat-input-row button {
-  background: linear-gradient(90deg, #2563eb 60%, #1e293b 100%);
+background: linear-gradient(90deg, #11998e 0%, #185a9d 100%);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -479,7 +491,7 @@
   outline: none;
 }
 .support-live-chat-input-row button:hover {
-  background: #1d4ed8;
+ background: linear-gradient(45deg, #185a9d 0%, #11998e 100%);
 }
 
 @media (max-width: 600px) {
@@ -530,4 +542,22 @@
     padding: 9px 14px;
     font-size: 0.98rem;
   }
+}
+.location-map-s{
+  margin-top: 18px;
+  color: #228B22;
+  font-size: 0.98rem;
+}
+.spa-map{
+  color: #11998e ;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lat-for{
+  color: #228B22;
+  margin-top: 18px;
+  font-weight: 500;
+  font-size: 1.05rem;
 }
