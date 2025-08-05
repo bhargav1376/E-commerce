@@ -4080,7 +4080,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                 <img src={newArrivalsSlides[slideIdx]} alt="New Arrival Slide" style={{width: '100%', height: 260, objectFit: 'cover', borderRadius: 16, boxShadow: '0 4px 24px rgba(70,130,169,0.10)'}} />
                 <div style={{position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8}}>
                   {newArrivalsSlides.map((_, idx) => (
-                    <span key={idx} style={{width: 12, height: 12, borderRadius: '50%', background: idx === slideIdx ? '#2563eb' : '#e0e7ef', display: 'inline-block', cursor: 'pointer', border: idx === slideIdx ? '2px solid #fff' : 'none'}} onClick={() => setSlideIdx(idx)}></span>
+                    <span key={idx} style={{width: 12, height: 12, borderRadius: '50%', background: idx === slideIdx ? '#228B22' : '#e0e7ef', display: 'inline-block', cursor: 'pointer', border: idx === slideIdx ? '2px solid #fff' : 'none'}} onClick={() => setSlideIdx(idx)}></span>
                   ))}
                 </div>
                 <button style={{position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', background: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, fontSize: 18, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}} onClick={() => setSlideIdx((slideIdx - 1 + newArrivalsSlides.length) % newArrivalsSlides.length)}>&lt;</button>
@@ -4402,7 +4402,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                   {/* Left arrow (FontAwesome) */}
                   <button
                     className="slider-arrow left"
-                    style={{position:'absolute', top:'50%', left:10, transform:'translateY(-50%)', background:'#2563eb', color:'#fff', border:'none', borderRadius:'50%',  fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', display:'none'}}
+                    style={{position:'absolute', top:'50%', left:10, transform:'translateY(-50%)', background:'#228B22', color:'#fff', border:'none', borderRadius:'50%',  fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', display:'none'}}
                     onClick={e => { e.stopPropagation(); setModalImgIdx(idx => (idx - 1 + productModal.images.length) % productModal.images.length); }}
                   >
                     <FontAwesomeIcon icon={faChevronLeft} />
@@ -4410,7 +4410,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                   {/* Right arrow (FontAwesome) */}
                   <button
                     className="slider-arrow right"
-                    style={{position:'absolute', top:'50%', right:10, transform:'translateX(-50%)', background:'#2563eb', color:'#fff', border:'none', borderRadius:'50%',  fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', display:'none'}}
+                    style={{position:'absolute', top:'46.5%', right:0, transform:'translateX(-50%)', background:'#228B22', color:'#fff', border:'none', borderRadius:'50%',  fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', display:'none'}}
                     onClick={e => { e.stopPropagation(); setModalImgIdx(idx => (idx + 1) % productModal.images.length); }}
                   >
                     <FontAwesomeIcon icon={faChevronRight} />
@@ -4420,7 +4420,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                     {productModal.images.map((img, idx) => (
                       <span
                         key={idx}
-                        style={{width:10, height:10, borderRadius:'50%', background: idx === modalImgIdx ? '#2563eb' : '#e0e7ef', display:'inline-block', cursor:'pointer', border: idx === modalImgIdx ? '2px solid #fff' : 'none'}}
+                        style={{width:10, height:10, borderRadius:'50%', background: idx === modalImgIdx ? '#228B22' : '#e0e7ef', display:'inline-block', cursor:'pointer', border: idx === modalImgIdx ? '2px solid #fff' : 'none'}}
                         onClick={e => { e.stopPropagation(); setModalImgIdx(idx); }}
                       ></span>
                     ))}
@@ -4488,14 +4488,14 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
               )}
               {productModal.extra && (
                 <div style={{
-                  color: '#2563eb',
+                  color: '#228B22',
                   fontWeight: 600,
                   fontSize: 15,
                   borderRadius: 8,
                   padding: '6px 0',
                   marginBottom: 8,
                 }}>
-                  <span style={{fontWeight:700, color:'#2563eb'}}>Extra:</span> {productModal.extra}
+                  <span style={{fontWeight:700, color:'#228B22'}}>Extra:</span> {productModal.extra}
                 </div>
               )}
               {/* Add-to-cart or notify button in modal */}
@@ -4579,7 +4579,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                      {/* Left arrow */}
                      <button
                        className="slider-arrow left"
-                       style={{position:'absolute', top:'50%', left:10, transform:'translateY(-50%)', background:'#2563eb', color:'#fff', border:'none', borderRadius:'50%', fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', cursor:'pointer', zIndex:2}}
+                       style={{position:'absolute', top:'50%', left:10, transform:'translateY(-50%)', background:'#228B22', color:'#fff', border:'none', borderRadius:'50%', fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', cursor:'pointer', zIndex:2}}
                        onClick={e => { e.stopPropagation(); setGalleryIdx(idx => (idx - 1 + productModal.images.length) % productModal.images.length); }}
                      >
                       <FontAwesomeIcon icon={faChevronLeft} />
@@ -4587,7 +4587,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                      {/* Right arrow */}
                      <button
                        className="slider-arrow right"
-                       style={{position:'absolute', top:'50%', right:10, transform:'translateY(-50%)', background:'#2563eb', color:'#fff', border:'none', borderRadius:'50%', fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', cursor:'pointer', zIndex:2}}
+                       style={{position:'absolute', top:'50%', right:10, transform:'translateY(-50%)', background:'#228B22', color:'#fff', border:'none', borderRadius:'50%', fontSize:18, padding:'6px 12px', fontWeight:700, cursor:'pointer', cursor:'pointer', zIndex:2}}
                        onClick={e => { e.stopPropagation(); setGalleryIdx(idx => (idx + 1) % productModal.images.length); }}
                      >
                        <FontAwesomeIcon icon={faChevronRight} />
@@ -4597,7 +4597,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                        {productModal.images.map((img, idx) => (
                          <span
                            key={idx}
-                           style={{width:14, height:14, borderRadius:'50%', background: idx === galleryIdx ? '#fff' : '#64748b', display:'inline-block', cursor:'pointer', border: idx === galleryIdx ? '2px solid #2563eb' : 'none'}}
+                           style={{width:14, height:14, borderRadius:'50%', background: idx === galleryIdx ? '#fff' : '#64748b', display:'inline-block', cursor:'pointer', border: idx === galleryIdx ? '2px solid #228B22' : 'none'}}
                            onClick={e => { e.stopPropagation(); setGalleryIdx(idx); }}
                          ></span>
                        ))}
