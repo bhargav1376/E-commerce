@@ -669,10 +669,10 @@ function Support() {
           <div className="support-modal" style={{maxWidth: 340}} onClick={e => e.stopPropagation()}>
             <button className="support-modal-close" onClick={() => setShowTicketStatusModal(false)}><FontAwesomeIcon icon={faTimes} /></button>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 8}}>
-              <FontAwesomeIcon icon={faTicketAlt} style={{color: '#2563eb', fontSize: 22}} />
+              <FontAwesomeIcon icon={faTicketAlt} style={{color: '#228B22', fontSize: 22}} />
               <h3 style={{margin: 0}}>Ticket Status</h3>
             </div>
-            <div style={{margin: '18px 0', color: '#2563eb', fontWeight: 600, fontSize: '1.1rem'}}>{ticketStatus}</div>
+            <div style={{margin: '18px 0', color: '#228B22', fontWeight: 600, fontSize: '1.1rem'}}>{ticketStatus}</div>
             <button className="support-help-topic-btn" onClick={() => setShowTicketStatusModal(false)}>Close</button>
           </div>
         </div>
