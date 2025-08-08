@@ -1,0 +1,211 @@
+/* signup.css */
+.signup-container-wrapper-outer {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  /* background: linear-gradient(120deg, #eafaf1 0%, #eef2f5 100%); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.signup-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  max-width: 1200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  /* border-radius: 1.5rem; */
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Make image fixed and non-scrollable */
+.signup-container-wrapper-Img {
+  flex: 1;
+  background: linear-gradient(135deg, #d4f5e9 0%, #eafaf1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.signup-image {
+  max-width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.15);
+}
+
+/* Scrollable right card section */
+.signup-card {
+  flex: 1;
+  background: #ffffff;
+  padding: 0rem 2.5rem 3rem 2.5rem;
+  overflow-y: auto;
+  max-height: 100vh;
+  border-left: 4px solid #a5d6a7;
+  overflow-y: scroll; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+.signup-card::-webkit-scrollbar {
+  display: none;  
+}
+.signup-container-wrapper-text{
+  position: absolute;
+  top: 1%;
+  left: 50px;
+}
+.signup-header{
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.02); 
+  border-radius: 4px;
+  text-shadow: 1px3px 2px black;
+}
+
+.signup-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #388e3c;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.input-group input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #b2dfdb;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  background: #f7fafc;
+  color: #2d3748;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #388e3c;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  width: 100%;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.password-toggle-btn:hover {
+  color: #4a5568;
+}
+
+.signup-btn {
+  padding: 1rem;
+  background: linear-gradient(90deg, #43ea7c 0%, #4a90e2 100%);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.15);
+}
+
+.signup-btn:hover {
+  background: linear-gradient(90deg, #388e3c 0%, #357ab7 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.25);
+}
+
+.signup-login-link {
+  display: block;
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #388e3c;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-login-link:hover {
+  color: #2e7031;
+  text-decoration: underline;
+}
+
+
+.error,
+.input-error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+  margin-left: 10px;
+}
+
+/* Popup Message Styling */
+.popup-message {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  padding: 14px 24px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 9999;
+  animation: fadeInOut 3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-message.success {
+  background-color: #28a745;
+}
+
+.popup-message.error {
+  background-color: #dc3545;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+

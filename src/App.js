@@ -8,6 +8,7 @@ import Wishlist from './Wishlist/Wishlist';
 import Offers from './Offers/Offers';
 import Support from './Support/Support';
 import Profile from './Profile/Profile'; 
+import Signup  from './Loginpages/Signup/Signup';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/offers' element={<Offers/>} />
         <Route path='/support' element={<Support/>} />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/signup' element={<Signup />} />
 
         <Route path="*" element={<Dashboard />} />
       </Routes>
