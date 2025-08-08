@@ -312,6 +312,27 @@ function Orders() {
   const [language, setLanguage] = useState('EN');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
+  const [showReorderModal, setShowReorderModal] = useState(false);
+  const [reorderItems, setReorderItems] = useState([]);
+  const [reorderForFriend, setReorderForFriend] = useState(false);
+  const [friendName, setFriendName] = useState('');
+  const [friendPhone, setFriendPhone] = useState('');
+  const [reorderAddress, setReorderAddress] = useState({});
+  const [showAddressSelect, setShowAddressSelect] = useState(false);
+  const [showAddAddress, setShowAddAddress] = useState(false);
+  const [addressList, setAddressList] = useState([
+    // Example addresses
+    { type: 'Home', address: '123 Main St', city: 'City', state: 'State', pincode: '123456' },
+    { type: 'Office', address: '456 Office Rd', city: 'City', state: 'State', pincode: '654321' }
+  ]);
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentType, setPaymentType] = useState('');
+  const [upiId, setUpiId] = useState('');
+  const [selectedUpiApp, setSelectedUpiApp] = useState('');
+  const [cardDetails, setCardDetails] = useState({ number: '', name: '', expiry: '', cvv: '' });
+  const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
+  const [showPaymentWarning, setShowPaymentWarning] = useState(false);
   const navigate = useNavigate();
   // Cart state for badge (unique products)
   const [cart, setCart] = useState(() => {
@@ -324,6 +345,7 @@ function Orders() {
       return [];
     }
   });
+  const [showOtherType, setShowOtherType] = useState(false);
 
   useEffect(() => {
     const updateCart = () => {
@@ -482,7 +504,78 @@ function Orders() {
 
   // Reorder handler (stub)
   const handleReorder = (order) => {
-    alert('Reorder placed for the same items! (Demo)');
+    setSelectedOrder(order);
+    setReorderItems(order.items.map(item => ({ ...item })));
+    setReorderAddress(order.deliveryAddress);
+    setReorderForFriend(order.customer.isOrderForFriend || false);
+    setFriendName('');
+    setFriendPhone('');
+    setShowReorderModal(true);
+    setOrderSuccess(false);
+    setShowPaymentModal(false);
+    setShowPaymentSuccess(false);
+    setPaymentType('');
+    setUpiId('');
+    setSelectedUpiApp('');
+    setCardDetails({ number: '', name: '', expiry: '', cvv: '' });
+  };
+
+  const updateReorderQty = (index, delta) => {
+    setReorderItems(items =>
+      items.map((item, i) =>
+        i === index
+          ? { ...item, qty: Math.max(1, item.qty + delta) }
+          : item
+      )
+    );
+  };
+
+  const handleReorderFriendToggle = () => {
+    setReorderForFriend(f => !f);
+    if (!reorderForFriend) {
+      setFriendName('');
+      setFriendPhone('');
+    }
+  };
+
+  // Address selection
+  const handleAddressSelect = (address) => {
+    setReorderAddress(address);
+    setShowAddressSelect(false);
+  };
+
+  const handleAddAddress = (newAddress) => {
+    setAddressList(list => [...list, newAddress]);
+    setReorderAddress(newAddress);
+    setShowAddAddress(false);
+    setShowAddressSelect(false);
+  };
+
+  // Payment
+  const handlePayAndPlaceOrder = () => {
+    if (!paymentType) {
+      setShowPaymentWarning(true);
+      setTimeout(() => setShowPaymentWarning(false), 1800);
+      return;
+    }
+    setShowPaymentModal(true);
+  };
+
+  const handlePaymentOption = (type) => {
+    setPaymentType(type);
+    setUpiId('');
+    setSelectedUpiApp('');
+    setCardDetails({ number: '', name: '', expiry: '', cvv: '' });
+  };
+
+  const handlePaymentSubmit = () => {
+    setShowPaymentModal(false);
+    setShowPaymentSuccess(true);
+    setTimeout(() => {
+      setShowPaymentSuccess(false);
+      setShowReorderModal(false);
+      setOrderSuccess(true);
+    }, 1200);
   };
 
   return (
@@ -857,13 +950,16 @@ function Orders() {
                   <div className="address-type">{selectedOrder.deliveryAddress.type}</div>
                   <div className="address-text">
                     {selectedOrder.deliveryAddress.address}<br />
-                    {selectedOrder.deliveryAddress.city}, {selectedOrder.deliveryAddress.state} {selectedOrder.deliveryAddress.pincode}
+                    {selectedOrder.deliveryAddress.city}, {selectedOrder.deliveryAddress.state} {selectedOrder.deliveryAddress.pincode}<br />
+                    {selectedOrder.deliveryAddress.landmark && <span>Landmark: {selectedOrder.deliveryAddress.landmark}</span>}
                   </div>
-                  {selectedOrder.deliveryInstructions && (
-                    <div className="delivery-instructions">
-                      <strong>Instructions:</strong> {selectedOrder.deliveryInstructions}
-                    </div>
-                  )}
+                  <button
+                    className="address-edit-btn"
+                    style={{color: '#059669'}}
+                    onClick={() => setShowAddressSelect(true)}
+                  >
+                    Edit Address
+                  </button>
                 </div>
               </div>
               <div className="detail-section">
@@ -945,17 +1041,335 @@ function Orders() {
           </div>
         </div>
       )}
-      {/* Footer */}
-      <footer className="dashboard-footer">
-        <div className="footer-content">
-          <span>© {new Date().getFullYear()} Fruits & Vegetables CRM. All rights reserved.</span>
-          <div className="footer-links">
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#contact">Contact</a>
+      {/* Reorder Modal (custom, not react-modal) */}
+      {showReorderModal && (
+        <div className="reorder-modal-overlay" onClick={() => setShowReorderModal(false)}>
+          <div className="reorder-modal" onClick={e => e.stopPropagation()}>
+            {!orderSuccess ? (
+              <>
+                <div className="modal-header">
+                  <h2>Reorder Products</h2>
+                  <button className="close-btn" onClick={() => setShowReorderModal(false)}>
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
+                <div className="modal-content">
+                  <div className="order-items-list">
+                    {reorderItems.map((item, idx) => (
+                      <div key={idx} className="order-item reorder-item">
+                        <img src={item.img} alt={item.name} />
+                        <div className="item-details">
+                          <h4>{item.name}</h4>
+                          <div className="qty-controls">
+                            <button
+                              className="qty-btn"
+                              onClick={() => updateReorderQty(idx, -1)}
+                              disabled={item.qty <= 1}
+                            >-</button>
+                            <span className="qty-value">{item.qty}</span>
+                            <button
+                              className="qty-btn"
+                              onClick={() => updateReorderQty(idx, 1)}
+                            >+</button>
+                            <span className="item-price">₹{item.price}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="reorder-friend-option">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={reorderForFriend}
+                        onChange={handleReorderFriendToggle}
+                      />
+                      Order for Friend
+                    </label>
+                    {reorderForFriend && (
+                      <div className="reorder-friend-fields">
+                        <input
+                          type="text"
+                          placeholder="Friend's Name"
+                          value={friendName}
+                          onChange={e => setFriendName(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Phone Number"
+                          value={friendPhone}
+                          onChange={e => setFriendPhone(e.target.value)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="address-details">
+                   <div className="address-select-row">
+                    <div className="address-label">Delivery Address</div>
+                    <div className="address-select-btn">
+                      <button
+                       className="address-edit-btn"
+                      onClick={() => setShowAddressSelect(true)}
+                    >
+                      Edit Address
+                    </button>
+                    </div>
+                   </div>
+                    <div className="address-type">{reorderAddress.type}</div>
+                    <div className="address-text">
+                      {reorderAddress.address}<br />
+                      {reorderAddress.city}, {reorderAddress.state} {reorderAddress.pincode}<br />
+                      {reorderAddress.landmark && <span>Landmark: {reorderAddress.landmark}</span>}
+                    </div>
+                    
+                  </div>
+                  <div className="payment-options">
+                    <button
+                      className={`payment-option-btn${paymentType === 'upi' ? ' selected' : ''}`}
+                      onClick={() => handlePaymentOption('upi')}
+                    >
+                      UPI
+                    </button>
+                    <button
+                      className={`payment-option-btn${paymentType === 'card' ? ' selected' : ''}`}
+                      onClick={() => handlePaymentOption('card')}
+                    >
+                      Card
+                    </button>
+                    <button
+                      className={`payment-option-btn${paymentType === 'cod' ? ' selected' : ''}`}
+                      onClick={() => handlePaymentOption('cod')}
+                    >
+                      COD
+                    </button>
+                  </div>
+                  <div className="reorder-pay-btn-row">
+                    <button
+                      className="reorder-pay-btn"
+                      onClick={handlePayAndPlaceOrder}
+                    >
+                       Place Order
+                    </button>
+                  </div>
+                  {showPaymentWarning && (
+                    <div className="payment-warning-popup">
+                      Please select a payment option before placing the order.
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="reorder-success">
+                <FontAwesomeIcon icon={faCheckCircle} className="success-icon" />
+                <h2>Order Placed Successfully!</h2>
+                <p>Your reorder has been placed. You will receive updates soon.</p>
+                <button
+                  className="close-btn"
+                  onClick={() => setShowReorderModal(false)}
+                >
+                  Close
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      </footer>
+      )}
+
+      {/* Address Select Modal */}
+      {showAddressSelect && (
+        <div className="custom-modal-overlay" onClick={() => setShowAddressSelect(false)}>
+          <div className="address-select-modal" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setShowAddressSelect(false)}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+            <h3>Select Address</h3>
+            <div className="address-list">
+              {addressList.map((addr, i) => (
+                <label key={i} className="address-radio-row">
+                  <input
+                    type="radio"
+                    name="selectedAddress"
+                    checked={
+                      reorderAddress &&
+                      reorderAddress.address === addr.address &&
+                      reorderAddress.city === addr.city &&
+                      reorderAddress.pincode === addr.pincode
+                    }
+                    onChange={() => handleAddressSelect(addr)}
+                  />
+                  <div>
+                    <div className="address-type">{addr.type}</div>
+                    <div className="address-text">
+                      {addr.address}, {addr.city}, {addr.state} {addr.pincode}
+                    </div>
+                  </div>
+                </label>
+              ))}
+            </div>
+            <button
+              className="add-address-btn"
+              onClick={() => { setShowAddAddress(true); setShowAddressSelect(false); }}
+            >
+              Add Address
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Add Address Modal */}
+      {showAddAddress && (
+        <div className="custom-modal-overlay" onClick={() => setShowAddAddress(false)}>
+          <div className="address-add-modal" onClick={e => e.stopPropagation()}>
+      <button className="modal-close-btn" style={{color: '#dc2626'}} onClick={() => setShowAddAddress(false)}>
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
+      <h3>Add Address</h3>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          const form = e.target;
+          handleAddAddress({
+            type: form.type.value === 'Other' ? form.otherType.value : form.type.value,
+            address: form.address.value,
+            city: form.city.value,
+            state: form.state.value,
+            pincode: form.pincode.value,
+            landmark: form.landmark.value
+          });
+        }}
+      >
+        <label>
+          <select name="type" required onChange={e => setShowOtherType(e.target.value === 'Other')}>
+            <option value="0" selected disabled >Select Address Type</option>
+            <option value="Home">Home</option>
+            <option value="Office">Office</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        {showOtherType && (
+          <input name="otherType" placeholder="Enter type" required />
+        )}
+        <input name="address" placeholder="Address" required />
+        <input name="city" placeholder="City" required />
+        <input name="state" placeholder="State" required />
+        <input name="pincode" placeholder="Pincode" required />
+        <input name="landmark" placeholder="Landmark" required />
+        <button className="add-address-btn" type="submit">Save Address</button>
+      </form>
+    </div>
+  </div>
+)}
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <div className="custom-modal-overlay" onClick={() => setShowPaymentModal(false)}>
+          <div className="payment-modal" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setShowPaymentModal(false)}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+            {paymentType === 'upi' && (
+              <>
+                <div className="modal-title">Pay with UPI</div>
+                <input
+                  type="text"
+                  placeholder="Enter UPI ID"
+                  value={upiId}
+                  onChange={e => setUpiId(e.target.value)}
+                />
+                <div className="upi-apps">
+                  {['GPay', 'PhonePe', 'Paytm'].map(app => (
+                    <div
+                      key={app}
+                      className={`upi-app${selectedUpiApp === app ? ' selected' : ''}`}
+                      onClick={() => setSelectedUpiApp(app)}
+                    >
+                      {app}
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="pay-btn"
+                  onClick={handlePaymentSubmit}
+                  disabled={!upiId || !selectedUpiApp}
+                >
+                  Pay Now
+                </button>
+              </>
+            )}
+            {paymentType === 'card' && (
+              <>
+                <div className="modal-title">Pay with Card</div>
+                <div className="card-fields">
+                  <input
+                    className="card-input"
+                    type="text"
+                    placeholder="Card Number"
+                    value={cardDetails.number}
+                    onChange={e => setCardDetails({ ...cardDetails, number: e.target.value })}
+                  />
+                  <input
+                    className="card-input"
+                    type="text"
+                    placeholder="Name on Card"
+                    value={cardDetails.name}
+                    onChange={e => setCardDetails({ ...cardDetails, name: e.target.value })}
+                  />
+                  <input
+                    className="card-input"
+                    type="text"
+                    placeholder="Expiry (MM/YY)"
+                    value={cardDetails.expiry}
+                    onChange={e => setCardDetails({ ...cardDetails, expiry: e.target.value })}
+                  />
+                  <input
+                    className="card-input"
+                    type="password"
+                    placeholder="CVV"
+                    value={cardDetails.cvv}
+                    onChange={e => setCardDetails({ ...cardDetails, cvv: e.target.value })}
+                  />
+                </div>
+                <button
+                  className="pay-btn"
+                  onClick={handlePaymentSubmit}
+                  disabled={
+                    !cardDetails.number ||
+                    !cardDetails.name ||
+                    !cardDetails.expiry ||
+                    !cardDetails.cvv
+                  }
+                >
+                  Pay Now
+                </button>
+              </>
+            )}
+            {paymentType === 'cod' && (
+              <>
+                <div className="modal-title">Cash on Delivery</div>
+                <p style={{marginBottom: 18, color: '#374151'}}>Confirm your order. You will pay at delivery.</p>
+                <button
+                  className="pay-btn"
+                  onClick={handlePaymentSubmit}
+                >
+                  Confirm Order
+    </button>
+  </>
+)}
+        {/* Payment Success Modal */}
+{showPaymentSuccess && (
+  <div className="custom-modal-overlay" onClick={() => setShowPaymentSuccess(false)}>
+    <div className="payment-success-modal" onClick={e => e.stopPropagation()}>
+      <button className="modal-close-btn" onClick={() => setShowPaymentSuccess(false)}>
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
+      <h2>Order Placed Successfully!</h2>
+      <p>Your payment was successful. You will receive updates soon.</p>
+    </div>
+  </div>
+)}
+          </div>
+        </div>
+      )}
+      {/* ...existing code... */}
     </>
   );
 }
