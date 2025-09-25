@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/E-commerce/static/css/main.d641ae7b.css",
-    "main.js": "/E-commerce/static/js/main.fcc55616.js",
+    "main.css": "/E-commerce/static/css/main.89a9dc9b.css",
+    "main.js": "/E-commerce/static/js/main.60f96531.js",
     "static/js/239.637265e6.chunk.js": "/E-commerce/static/js/239.637265e6.chunk.js",
     "static/js/977.a327335a.chunk.js": "/E-commerce/static/js/977.a327335a.chunk.js",
     "static/js/732.3a5ddc5f.chunk.js": "/E-commerce/static/js/732.3a5ddc5f.chunk.js",
     "static/js/453.158dd2ee.chunk.js": "/E-commerce/static/js/453.158dd2ee.chunk.js",
+    "static/media/Bhargav-logo.png": "/E-commerce/static/media/Bhargav-logo.5eb6e055cb32f3fd3458.png",
     "static/media/order-png.webp": "/E-commerce/static/media/order-png.a933087d1891903d3483.webp",
     "static/media/Signup.jpg": "/E-commerce/static/media/Signup.a9980b44d32c8e6154a8.jpg",
     "static/media/tag-png.png": "/E-commerce/static/media/tag-png.c436ce06ad26ec1c3f05.png",
     "static/media/support-png.png": "/E-commerce/static/media/support-png.accaf63bd476957cb74e.png",
-    "static/media/unnamed.png": "/E-commerce/static/media/unnamed.6a3b8be15001b36b409c.png",
     "static/media/offers-png.png": "/E-commerce/static/media/offers-png.20cc92482878dd7f25a1.png",
     "static/media/cart-header-png.png": "/E-commerce/static/media/cart-header-png.18f1e64d3ca5c5b54da7.png",
     "static/media/Home-png.png": "/E-commerce/static/media/Home-png.01e7a09069c62f5614c9.png",
@@ -22,15 +22,15 @@
     "static/media/slick.ttf": "/E-commerce/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/E-commerce/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/E-commerce/index.html",
-    "main.d641ae7b.css.map": "/E-commerce/static/css/main.d641ae7b.css.map",
-    "main.fcc55616.js.map": "/E-commerce/static/js/main.fcc55616.js.map",
+    "main.89a9dc9b.css.map": "/E-commerce/static/css/main.89a9dc9b.css.map",
+    "main.60f96531.js.map": "/E-commerce/static/js/main.60f96531.js.map",
     "239.637265e6.chunk.js.map": "/E-commerce/static/js/239.637265e6.chunk.js.map",
     "977.a327335a.chunk.js.map": "/E-commerce/static/js/977.a327335a.chunk.js.map",
     "732.3a5ddc5f.chunk.js.map": "/E-commerce/static/js/732.3a5ddc5f.chunk.js.map",
     "453.158dd2ee.chunk.js.map": "/E-commerce/static/js/453.158dd2ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d641ae7b.css",
-    "static/js/main.fcc55616.js"
+    "static/css/main.89a9dc9b.css",
+    "static/js/main.60f96531.js"
   ]
 }
