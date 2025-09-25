@@ -15,7 +15,7 @@ import logouticon from '../Images/logout-ico.png';
 import notificationicon from '../Images/notifications-png.png';
 import cartheadericon from '../Images/cart-header-png.png';
 import tagicon from '../Images/tag-png.png';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useNavigate } from 'react-router-dom';
 
 const user = {

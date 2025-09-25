@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAppleAlt, faShoppingCart, faBars, faChevronLeft, faChevronDown, faChevronUp, faUser, faCog, faSignOutAlt, faTag, faSearch, faHome, faBell, faHeart as faHeartFilled, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingCart as faCartIcon } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { allProducts } from '../Products/Products.jsx';
 import './Wishlist.css';

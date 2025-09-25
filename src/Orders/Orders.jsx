@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Orders.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAppleAlt, faShoppingCart, faBars, faChevronLeft, faCog, faChevronDown, faChevronUp, faUser, faSignOutAlt, faTag, faSearch, faHome, faBell, faEye, faDownload, faTimes, faMapMarkerAlt, faBoxOpen, faCheckCircle, faTimesCircle, faClock, faRedo, faSyncAlt, faFilter, faHeart, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import Homeicon from '../Images/Home-png.png';
@@ -953,13 +953,13 @@ function Orders() {
                     {selectedOrder.deliveryAddress.city}, {selectedOrder.deliveryAddress.state} {selectedOrder.deliveryAddress.pincode}<br />
                     {selectedOrder.deliveryAddress.landmark && <span>Landmark: {selectedOrder.deliveryAddress.landmark}</span>}
                   </div>
-                  <button
+                  {/* <button
                     className="address-edit-btn"
                     style={{color: '#059669'}}
                     onClick={() => setShowAddressSelect(true)}
                   >
                     Edit Address
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className="detail-section">

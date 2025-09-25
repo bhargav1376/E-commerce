@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Dashboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAppleAlt, faCarrot, faShoppingCart, faBars, faChevronLeft, faChevronDown, faChevronUp, faUser, faCog, faSignOutAlt, faGlobe, faTag, faQuestionCircle, faSearch, faHome, faCaretLeft, faCaretRight, faBell, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useNavigate } from 'react-router-dom';
 import Homeicon from '../Images/Home-png.png';
 import producticon from '../Images/Product-png.png';

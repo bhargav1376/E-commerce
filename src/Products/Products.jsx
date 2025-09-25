@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAppleAlt, faCheckCircle, faShoppingCart, faHeart, faChevronRight  ,faHome, faUser, faTag, faCog, faBars, faChevronLeft, faChevronDown, faChevronUp, faSignOutAlt, faGlobe, faBell, faSearch, faTrash, faFire, faChartLine, faStar, faExpand, faCompress, faHeart as faHeartFilled, faQuestionCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Homeicon from '../Images/Home-png.png';
 import producticon from '../Images/Product-png.png';

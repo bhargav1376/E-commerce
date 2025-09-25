@@ -3,7 +3,7 @@ import '../Index/Dashboard.css';
 import './Support.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faChevronDown, faChevronUp, faTimes, faStar, faInfoCircle, faEnvelope, faHeadset, faTicketAlt } from '@fortawesome/free-solid-svg-icons';
-import logo from '../Images/unnamed.png';
+import logo from '../Images/Bhargav-logo.png';
 import { useNavigate } from 'react-router-dom';
 import Homeicon from '../Images/Home-png.png';
 import producticon from '../Images/Product-png.png';
