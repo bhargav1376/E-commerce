@@ -18,6 +18,17 @@
     margin-top: 50px;
     padding-left: 30px;
 }
+@media screen and (max-width:500px) {
+  .profile-main-tabs{
+    padding-left: 0px;
+  }
+  .profile-tabs-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+  }
+}
 .profile-tab-btn {
   background: #f3f4f6;
   border: none;
@@ -28,6 +39,13 @@
   color: #429321;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+}
+@media screen and (max-width:500px) {
+  .profile-tab-btn{
+    font-size: 0.8rem;
+    padding: 8px 25px;
+  }
+
 }
 .profile-tab-btn.active {
   background:linear-gradient(135deg, #b4ec51 0%, #429321 100%);
@@ -55,6 +73,11 @@
 .profile-row {
   display: flex;
   gap: 18px;
+}
+@media screen and (max-width:749px) {
+  .profile-row{
+    display: grid;
+  }
 }
 .profile-field {
   flex: 1;

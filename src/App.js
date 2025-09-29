@@ -9,6 +9,7 @@ import Offers from './Offers/Offers';
 import Support from './Support/Support';
 import Profile from './Profile/Profile'; 
 import Signup  from './Loginpages/Signup/Signup';
+import Settings from './Settings/Settings';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/support' element={<Support/>} />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/settings' element={<Settings />} />
 
         <Route path="*" element={<Dashboard />} />
       </Routes>

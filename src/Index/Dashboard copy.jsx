@@ -22,7 +22,7 @@ import { allProducts } from '../Products/Products.jsx';
 
 const user = {
   name: 'Bhargav',
-  image: 'https://raw.githubusercontent.com/bhargavchintha/About-Me/872b6bcaaa2984045283b79015828f8c67bfbc27/Images/favicon.png',
+  image: 'https://randomuser.me/api/portraits/men/32.jpg',
 };
 
 // Slideshow images and content
@@ -234,7 +234,7 @@ function Dashboard() {
   const [isSlideHovered, setIsSlideHovered] = useState(false);
   const [categoryStartIdx, setCategoryStartIdx] = useState(0);
   // Show 7 cards when sidebar is open, 8 when collapsed
-  const [visibleCategoryCount, setVisibleCategoryCount] = useState(7);
+  //const visibleCategoryCount = collapsed ? 8 : 7;
   const [showCategoryArrows, setShowCategoryArrows] = useState(false);
   const navigate = useNavigate();
   // Cart state for badge (unique products)
@@ -267,6 +267,32 @@ function Dashboard() {
     };
   }, []);
 
+
+  function QuickCategories({ categoryImages, categoryStartIdx = 0 }) {
+    const [visibleCategoryCount, setVisibleCategoryCount] = useState(8); // Default fallback
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      const updateCategoryCount = () => {
+        const width = window.innerWidth;
+  
+        if (width < 480) {
+          setVisibleCategoryCount(4);
+        } else if (width < 768) {
+          setVisibleCategoryCount(6);
+        } else if (width < 1024) {
+          setVisibleCategoryCount(7);
+        } else {
+          setVisibleCategoryCount(8);
+        }
+      };
+  
+      updateCategoryCount(); // Initial run
+      window.addEventListener('resize', updateCategoryCount);
+  
+      return () => window.removeEventListener('resize', updateCategoryCount);
+    }, []);
+
   // Only toggle dropdown, do not change user image
   const handleUserDropdown = () => {
     setDropdownOpen(d => !d);
@@ -295,51 +321,15 @@ function Dashboard() {
     return () => clearTimeout(timer);
   }, [slideIdx, isSlideHovered]);
 
-  useEffect(() => {
-    const calculateVisibleCount = () => {
-      const width = window.innerWidth;
-
-      let count;
-      if (collapsed) {
-        if (width >= 1200) count = 8;
-        else if (width >= 992) count = 6;
-        else if (width >= 880) count = 7;
-        else if (width >= 768) count = 6;
-        else if (width >= 730) count = 5;
-        else if (width >= 600) count = 5; 
-        else if (width >= 400) count = 3; 
-        else count = 3;
-      } else {
-        if (width >= 1200) count = 7;
-        else if (width >= 992) count = 5;
-        else if (width >= 880) count = 6;
-        else if (width >= 768) count = 5;
-        else if (width >= 750) count = 4;
-        else if (width >= 730) count = 4;
-        else if (width >= 600) count = 3;
-        else if (width >= 400) count = 2; 
-        else count = 2;
-      }
-
-      setVisibleCategoryCount(count);
-    };
-
-    calculateVisibleCount();
-
-    window.addEventListener('resize', calculateVisibleCount);
-    return () => window.removeEventListener('resize', calculateVisibleCount);
-  }, [collapsed]);
-
-  // Next slide
   const nextCategorySlide = () => {
     setCategoryStartIdx(idx =>
-      idx + visibleCategoryCount < (categoryImages?.length ?? 0) ? idx + 1 : idx
+      idx + visibleCategoryCount < (categoryImages ? categoryImages.length : 0) ? idx + 1 : idx
     );
   };
-
-  // Previous slide
   const prevCategorySlide = () => {
-    setCategoryStartIdx(idx => (idx > 0 ? idx - 1 : 0));
+    setCategoryStartIdx(idx =>
+      idx > 0 ? idx - 1 : 0
+    );
   };
 
   // Add modal state
@@ -629,7 +619,7 @@ function Dashboard() {
                 )}
               </div>
               </div>
-              <div className="icon-wrapper language-icon  icon-noft " onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
+              <div className="icon-wrapper language-icon" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
                 <img src={languageFlagImages[language]} alt={language} className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}} />
                 <span className="language-name">{language}</span>
                 {languageDropdown && (
@@ -697,8 +687,8 @@ function Dashboard() {
                   >Go to {slides[slideIdx].title}</button> */}
                   <div className="slide-img-overlay" />
                   <div className="slide-content new-top-slide-content overlay-content">
-                    <h3 className='h-tag-detail' >{slides[slideIdx].title}</h3>
-                    <p className='p-tag-detail' >{slides[slideIdx].desc}</p>
+                    <h3>{slides[slideIdx].title}</h3>
+                    <p>{slides[slideIdx].desc}</p>
                   </div>
                 </div>
               </div>

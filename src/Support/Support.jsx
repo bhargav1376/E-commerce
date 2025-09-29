@@ -384,7 +384,7 @@ function Support() {
               </div>
             </div>
             <div className="header-icons">
-              <div className="icon-wrapper">
+              <div className="icon-wrapper icon-noft">
                 <img className='icon-header' src={notificationicon} />
               </div>
               <div className="icon-wrapper" style={{position: 'relative', cursor: 'pointer'}} onClick={() => navigate('/cart')}>
@@ -410,7 +410,7 @@ function Support() {
                   }}>{cart && cart.length}</span>
                 )}
               </div>
-              <div className="icon-wrapper language-icon" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
+              <div className="icon-wrapper language-icon icon-noft" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
                 <img src={languageFlagImages[language]} alt={language} className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}} />
                 <span className="language-name">{language}</span>
                 {languageDropdown && (
@@ -423,7 +423,7 @@ function Support() {
                   </div>
                 )}
               </div>
-              <div className="icon-wrapper">
+              <div className="icon-wrapper icon-noft">
                 <img className='icon-header' src={tagicon} />
               </div>
               <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
