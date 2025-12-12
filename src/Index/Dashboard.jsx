@@ -144,7 +144,7 @@ const cardSections = [
 
 const categoryImages = [
   {
-    img: 'https://www.usatoday.com/gcdn/-mm-/0f42e32787c67e840e95e667e4b8fc2d8fc90f80/c=395-0-971-768/local/-/media/2021/05/08/USATODAY/usatsports/imageForEntry35-1sQ.jpg',
+    img: 'https://static.vecteezy.com/system/resources/previews/042/729/203/non_2x/a-bountiful-selection-of-fresh-vibrant-fruits-are-scattered-artfully-on-the-pristine-white-background-photo.jpg',
     label: 'Fruits',
     className: 'fruits'
   },
@@ -224,6 +224,17 @@ const whyShop = [
 
 function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
+  useEffect( () =>{
+      const mediaQuery = window.matchMedia("(max-width: 700px)");
+         setCollapsed(mediaQuery.matches);
+       const handleResize = (e) => {
+      setCollapsed(e.matches);
+    };
+     mediaQuery.addEventListener("change", handleResize);
+      return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifDropdown, setNotifDropdown] = useState(false);
   const [msgDropdown, setMsgDropdown] = useState(false);
@@ -629,7 +640,7 @@ function Dashboard() {
                 )}
               </div>
               </div>
-              <div className="icon-wrapper language-icon  icon-noft " onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
+              {/* <div className="icon-wrapper language-icon  icon-noft " onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
                 <img src={languageFlagImages[language]} alt={language} className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}} />
                 <span className="language-name">{language}</span>
                 {languageDropdown && (
@@ -641,7 +652,7 @@ function Dashboard() {
                     <div className="language-option" onClick={() => handleLanguageSelect('ES')}><img src={languageFlagImages['ES']} alt="ES" className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)', verticalAlign: 'middle'}} /> Spanish</div>
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="icon-wrapper icon-noft ">
               <img className='icon-header' src={tagicon} />
               </div>

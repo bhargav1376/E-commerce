@@ -24,7 +24,7 @@ import tagicon from '../Images/tag-png.png';
 
 const user = {
   name: 'Bhargav',
-  image: 'https://randomuser.me/api/portraits/men/32.jpg',
+ image: 'https://raw.githubusercontent.com/bhargavchintha/About-Me/872b6bcaaa2984045283b79015828f8c67bfbc27/Images/favicon.png',
 };
 
 const allProducts = [
@@ -3537,7 +3537,7 @@ function Products() {
     FR: 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
     ES: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg',
   };
-  const [collapsed, setCollapsed] = useState(false);
+    
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [languageDropdown, setLanguageDropdown] = useState(false);
   const [language, setLanguage] = useState('EN');
@@ -3888,6 +3888,37 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
     return () => window.removeEventListener('keydown', handleKey);
   }, [galleryOpen, productModal]);
 
+
+  let displayName = user.name;
+  try {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    if (profile && profile.firstName) displayName = profile.firstName;
+  } catch {}
+
+  const [headerImage, setHeaderImage] = useState(() => {
+      try {
+        const profile = JSON.parse(localStorage.getItem('profile'));
+        return (profile && profile.image) ? profile.image : user.image;
+      } catch {
+        return user.image;
+      }
+    });
+const [slickcollapsed, setslickCollapsed] = useState(false);
+const slidesToShowCount = slickcollapsed ? 3 : 3;
+
+  const [collapsed, setCollapsed] = useState(false);
+  useEffect( () =>{
+      const mediaQuery = window.matchMedia("(max-width: 700px)");
+         setCollapsed(mediaQuery.matches);
+       const handleResize = (e) => {
+      setCollapsed(e.matches);
+    };
+     mediaQuery.addEventListener("change", handleResize);
+      return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+
   return (
     <div className={`dashboard-container${collapsed ? ' collapsed' : ''}`}> 
       {/* Sidebar */}
@@ -4008,7 +4039,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
             </div>
           </div>
           <div className="header-icons">
-            <div className="icon-wrapper">
+            <div className="icon-wrapper icon-noft ">
             <img className='icon-header' src={notificationicon} />
             </div>
             <div className="icon-wrapper" style={{position: 'relative', cursor: 'pointer'}} onClick={() => navigate('/cart')}>
@@ -4034,7 +4065,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                   }}>{cart.length}</span>
                 )}
             </div>
-            <div className="icon-wrapper language-icon" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
+            {/* <div className="icon-wrapper language-icon" onClick={handleLanguageClick} style={{position: 'relative', fontSize: '1.1rem', padding: 0, background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '4px'}}>
               <img src={languageFlagImages[language]} alt={language} className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)'}} />
               <span className="language-name">{language}</span>
               {languageDropdown && (
@@ -4046,21 +4077,21 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                   <div className="language-option" onClick={() => handleLanguageSelect('ES')}><img src={languageFlagImages['ES']} alt="ES" className="language-flag-img" style={{width: '22px', height: '16px', objectFit: 'cover', borderRadius: '3px', marginRight: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)', verticalAlign: 'middle'}} /> Spanish</div>
                 </div>
               )}
-            </div>
-            <div className="icon-wrapper">
+            </div> */}
+             <div className="icon-wrapper icon-noft ">
             <img className='icon-header' src={tagicon} />
             </div>
             <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
-              <img src={user.image} alt="User" className="user-image" />
-              <span className="user-name">{user.name}</span>
-              <span className="user-badge">Premium</span>
-              <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
+              <img src={headerImage} alt="User" className="user-image" />
+                <span className="user-name">{displayName}</span>
+                <span className="user-badge">Premium</span>
+                <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
             </div>
             {dropdownOpen && (
-              <div className="user-dropdown">
-                <a href="#profile"><img className='icon-pngs-header' src={usericon} /> Profile</a>
-                <a href="#settings"><img className='icon-pngs-header' src={settingicon}/> Settings</a>
-                <button className="logout-btn"><img className='icon-pngs-header' src={logouticon} /> Logout</button>
+               <div className="user-dropdown">
+                  <a onClick={() => navigate('/profile')}><img className='icon-pngs-header' src={usericon} /> Profile</a>
+                  <a onClick={() => navigate('/settings')}><img className='icon-pngs-header' src={settingicon}/> Settings</a>
+                  <button className="logout-btn"><img className='icon-pngs-header' src={logouticon} /> Logout</button>
               </div>
             )}
           </div>
@@ -4090,35 +4121,71 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
           )} */}
           {['All', 'Fruits', 'Vegetables', 'Electronics', 'Home', 'Dairy', 'Bakery', 'Snacks', 'Beverages', 'Personal Care', 'Stationery', 'Toys', 'Pet Supplies'].includes(selectedCategory) && (
             <div className="category-summary">
-              <div className="summary-cards-row large">
-                <Slider 
-                    className="summary-slider"
-                    arrows={true}
-                    dots={false}
-                    infinite={true}
-                    speed={500}
-                    slidesToShow={3}
-                    slidesToScroll={1}
-                    autoplay={true}
-                    autoplaySpeed={1800}
-                  >
-                    {summaryCards.map(({ title, product, placeholder }) => (
-                        <SummaryProductCard
-                          key={title}
-                          title={title}
-                          product={product}
-                          placeholder={placeholder}
-                          notified={notified}
-                          setNotified={setNotified}
-                          addToCart={addToCart}
-                          cart={cart}
-                          updateQty={updateQty}
-                          wishlist={wishlist}
-                          handleWishlist={handleWishlist}
-                          setProductModal={setProductModal} 
-                        />
-                    ))}
-                  </Slider>
+              <div className="summary-cards-row large" style={{ width: "100%", maxWidth: "100%" }}>
+                <Slider
+  className="summary-slider"
+  arrows={true}
+  dots={false}
+  infinite={true}
+  speed={500}
+  slidesToShow={slidesToShowCount}
+  slidesToScroll={1}
+  autoplay={true}
+  autoplaySpeed={1800}
+  responsive={[
+    {
+      breakpoint: 1220,
+      settings: {
+        slidesToShow: slickcollapsed  ? 3 : 2
+      }
+    },
+     {
+      breakpoint: 1040,
+      settings: {
+        slidesToShow: slickcollapsed  ? 2 : 2
+      }
+    },
+     {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: slickcollapsed  ? 2 : 2
+      }
+    },
+     {
+      breakpoint: 860,
+      settings: {
+        slidesToShow: slickcollapsed  ? 2 : 1
+      }
+    }
+    ,
+     {
+      breakpoint: 650,
+      settings: {
+        slidesToShow: slickcollapsed  ? 1 : 1
+      }
+    }
+  ]}
+>
+
+  
+  {summaryCards.map(({ title, product, placeholder }) => (
+    <SummaryProductCard
+      key={title}
+      title={title}
+      product={product}
+      placeholder={placeholder}
+      notified={notified}
+      setNotified={setNotified}
+      addToCart={addToCart}
+      cart={cart}
+      updateQty={updateQty}
+      wishlist={wishlist}
+      handleWishlist={handleWishlist}
+      setProductModal={setProductModal}
+    />
+  ))}
+</Slider>
+
               </div>
             </div>
           )}
@@ -4226,7 +4293,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
           )}
           {/* --- End products grid --- */}
           {/* Bottom Fixed Cart Summary - Inside products-page-content */}
-          {/* {cart.length > 0 && (
+          {cart.length > 0 && (
             <div className="bottom-cart-summary-inline">
               <div className="cart-summary-content">
                 <div className="cart-summary-left">
@@ -4252,7 +4319,7 @@ const topRatedProduct = productsInCategory.reduce((max, p) =>
                 </div>
               </div>
             </div>
-          )} */}
+          )}
         </div>
         {/* Cart Modal */}
         {showCartModal && (

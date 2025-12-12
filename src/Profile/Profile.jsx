@@ -241,7 +241,7 @@ function Profile() {
       <aside className="sidebar">
         <ul className="sidebar-links">
                   <li>
-                    <a className="active" onClick={() => navigate('/')}
+                    <a className="activ" onClick={() => navigate('/')}
                       style={{ cursor: 'pointer' }}>
                       <span className="nld-sidebar-link-icon" style={{ color: '#dc2626' }}>
                         <img className='icon-pngs' src={Homeicon} />
@@ -374,9 +374,9 @@ function Profile() {
             </div>
             <div className="user-info" onClick={handleUserDropdown} style={{display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px'}}>
               <img src={headerImage} alt="User" className="user-image" />
-              <span className="user-name">{displayName}</span>
-              <span className="user-badge">Premium</span>
-              <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
+                  <span className="user-name">{displayName}</span>
+                  <span className="user-badge">Premium</span>
+                  <FontAwesomeIcon icon={dropdownOpen ? faChevronUp : faChevronDown} className="dropdown-icon" />
             </div>
             {dropdownOpen && (
               <div className="user-dropdown">
